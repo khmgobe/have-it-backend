@@ -1,9 +1,8 @@
-package com.have.it.backend.v1.member.application.dto.response;
+package com.have.it.backend.v1.member.domain.dto.response;
 
 import com.have.it.backend.v1.member.domain.Member;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
 public class MemberReadResponse {

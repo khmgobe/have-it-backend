@@ -1,8 +1,8 @@
-package com.have.it.backend.v1.member.ui;
+package com.have.it.backend.v1.member.controller;
 
 import com.have.it.backend.v1.common.util.BaseResponse;
-import com.have.it.backend.v1.member.application.dto.MemberDeleteService;
-import com.have.it.backend.v1.member.application.dto.response.MemberDeleteResponse;
+import com.have.it.backend.v1.member.domain.dto.MemberDeleteService;
+import com.have.it.backend.v1.member.domain.dto.response.MemberDeleteResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

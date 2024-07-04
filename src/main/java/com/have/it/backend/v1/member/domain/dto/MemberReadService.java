@@ -1,7 +1,7 @@
-package com.have.it.backend.v1.member.application.dto;
+package com.have.it.backend.v1.member.domain.dto;
 
 import com.have.it.backend.v1.common.util.BaseException;
-import com.have.it.backend.v1.member.application.dto.response.MemberReadResponse;
+import com.have.it.backend.v1.member.domain.dto.response.MemberReadResponse;
 import com.have.it.backend.v1.member.domain.Member;
 import com.have.it.backend.v1.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,9 +1,9 @@
-package com.have.it.backend.v1.member.ui;
+package com.have.it.backend.v1.member.controller;
 
 import com.have.it.backend.v1.common.util.BaseResponse;
-import com.have.it.backend.v1.member.application.dto.MemberUpdateService;
-import com.have.it.backend.v1.member.application.dto.request.MemberUpdateRequest;
-import com.have.it.backend.v1.member.application.dto.response.MemberUpdateResponse;
+import com.have.it.backend.v1.member.domain.dto.MemberUpdateService;
+import com.have.it.backend.v1.member.domain.dto.MemberUpdateRequest;
+import com.have.it.backend.v1.member.domain.dto.response.MemberUpdateResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PatchMapping;

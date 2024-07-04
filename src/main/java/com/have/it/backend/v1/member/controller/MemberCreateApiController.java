@@ -1,9 +1,9 @@
-package com.have.it.backend.v1.member.ui;
+package com.have.it.backend.v1.member.controller;
 
 import com.have.it.backend.v1.common.util.BaseResponse;
-import com.have.it.backend.v1.member.application.dto.MemberCreateService;
-import com.have.it.backend.v1.member.application.dto.request.MemberCreateRequest;
-import com.have.it.backend.v1.member.application.dto.response.MemberCreateResponse;
+import com.have.it.backend.v1.member.domain.dto.MemberCreateService;
+import com.have.it.backend.v1.member.domain.dto.MemberCreateRequest;
+import com.have.it.backend.v1.member.domain.dto.response.MemberCreateResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

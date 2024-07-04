@@ -1,6 +1,5 @@
-package com.have.it.backend.v1.member.application.dto;
+package com.have.it.backend.v1.member.domain.dto;
 
-import com.have.it.backend.v1.member.application.dto.request.MemberCreateRequest;
 import com.have.it.backend.v1.member.domain.Member;
 import com.have.it.backend.v1.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
