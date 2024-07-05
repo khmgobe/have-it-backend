@@ -1,9 +1,8 @@
 package com.have.it.backend.v1.member.controller;
 
 import com.have.it.backend.v1.common.util.BaseResponse;
-import com.have.it.backend.v1.member.domain.dto.MemberCreateService;
-import com.have.it.backend.v1.member.domain.dto.MemberCreateRequest;
-import com.have.it.backend.v1.member.domain.dto.response.MemberCreateResponse;
+import com.have.it.backend.v1.member.service.MemberCreateService;
+import com.have.it.backend.v1.member.domain.dto.request.MemberCreateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +16,7 @@ public class MemberCreateApiController {
     private final MemberCreateService service;
 
     @PostMapping("/api/v1/member/register")
-    public ResponseEntity<BaseResponse<MemberCreateResponse>> createMember(@RequestBody MemberCreateRequest memberCreateRequest) {
+    public ResponseEntity<BaseResponse<Void>> createMember(@RequestBody MemberCreateRequest memberCreateRequest) {
 
         service.createMember(memberCreateRequest);
 

@@ -1,7 +1,7 @@
 package com.have.it.backend.v1.member.controller;
 
 import com.have.it.backend.v1.common.util.BaseResponse;
-import com.have.it.backend.v1.member.domain.dto.MemberReadService;
+import com.have.it.backend.v1.member.service.MemberReadService;
 import com.have.it.backend.v1.member.domain.dto.response.MemberReadResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +18,10 @@ public class MemberReadApiController {
     @GetMapping("/api/v1/member/read/{memberId}")
     public ResponseEntity<BaseResponse<MemberReadResponse>> readMember(@PathVariable Long memberId) {
 
-        service.readMember(memberId);
+        MemberReadResponse memberReadResponse = service.readMember(memberId);
 
         return ResponseEntity
                 .ok()
-                .body(BaseResponse.success());
+                .body(BaseResponse.success(memberReadResponse));
     }
 }
