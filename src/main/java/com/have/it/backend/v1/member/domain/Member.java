@@ -17,12 +17,13 @@ public class Member {
 
 
     private static final int MAX_NICKNAME_LENGTH = 15;
+    private static final int MAX_EMAIL_LENGTH = 30;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String email;
 
     @Column(nullable = false)
@@ -47,7 +48,7 @@ public class Member {
 
     private void validateNickname(final String nickname) {
         if(Objects.isNull(nickname) || nickname.length() > MAX_NICKNAME_LENGTH) {
-            throw new BaseException(ExceptionInformation.ID_NOT_FOUND);
+            throw new BaseException(ExceptionInformation.MEMBER_NICKNAME_ILLEGAL_LENGTH);
         }
     }
 }
