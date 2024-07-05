@@ -1,4 +1,4 @@
-package com.have.it.backend.v1.member.domain.dto;
+package com.have.it.backend.v1.member.domain.dto.request;
 
 import lombok.Builder;
 import lombok.Getter;
