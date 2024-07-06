@@ -18,7 +18,7 @@ public class MemberReadApiController {
     @GetMapping("/api/v1/member/read/{memberId}")
     public ResponseEntity<BaseResponse<MemberReadResponse>> readMember(@PathVariable Long memberId) {
 
-        MemberReadResponse memberReadResponse = service.readMember(memberId);
+        MemberReadResponse memberReadResponse = service.findMemberById(memberId);
 
         return ResponseEntity
                 .ok()

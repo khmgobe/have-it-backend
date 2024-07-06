@@ -4,7 +4,7 @@ import com.have.it.backend.v1.common.util.BaseException;
 import com.have.it.backend.v1.common.util.enumeration.ExceptionInformation;
 import com.have.it.backend.v1.member.domain.Member;
 import com.have.it.backend.v1.member.domain.dto.request.MemberCreateRequest;
-import com.have.it.backend.v1.member.repository.MemberJpaRepository;
+import com.have.it.backend.v1.member.service.port.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class MemberCreateService {
 
-    private final MemberJpaRepository repository;
+    private final MemberRepository repository;
 
     public void createMember(final MemberCreateRequest memberCreateRequest) {
 
@@ -32,6 +32,7 @@ public class MemberCreateService {
     }
 
     private void validateDuplicateEmail(String email) {
+
         if(repository.existsByEmail(email)) {
             throw new BaseException(ExceptionInformation.MEMBER_EMAIL_DUPLICATED);
         }

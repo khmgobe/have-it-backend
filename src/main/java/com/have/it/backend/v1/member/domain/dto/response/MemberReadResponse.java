@@ -1,6 +1,7 @@
 package com.have.it.backend.v1.member.domain.dto.response;
 
 import com.have.it.backend.v1.member.domain.Member;
+import com.have.it.backend.v1.member.infrastructure.member;
 import lombok.Builder;
 import lombok.Getter;
 
