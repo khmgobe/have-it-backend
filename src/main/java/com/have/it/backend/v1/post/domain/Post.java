@@ -1,27 +1,41 @@
 package com.have.it.backend.v1.post.domain;
 
 import com.have.it.backend.v1.member.domain.Member;
-import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import com.have.it.backend.v1.post.domain.dto.request.PostCreateRequest;
+import lombok.Builder;
+import lombok.Getter;
 
-@Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class Post {
 
+    private final Long id;
+    private final String title;
+    private final String content;
+    private final Member member;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Column(nullable = false)
-    private String title;
+    @Builder
+    private Post(Long id, String title, String content, Member member) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.member = member;
+    }
 
-    @Column(nullable = false)
-    private String content;
+    public static Post of(PostCreateRequest request, Member member) {
+        return Post
+                .builder()
+                .title(request.getTitle())
+                .content(request.getContent())
+                .member(member)
+                .build();
+    }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
-    private Member member;
+    public void update(String title, String content) {
 
+        Post.builder()
+                .title(title)
+                .content(content)
+                .build();
+    }
 }
