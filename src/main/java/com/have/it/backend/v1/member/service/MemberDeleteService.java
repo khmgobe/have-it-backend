@@ -24,6 +24,6 @@ public class MemberDeleteService {
 
         repository
                 .findById(memberId)
-                .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NOT_FOUND));
+                .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
     }
 }

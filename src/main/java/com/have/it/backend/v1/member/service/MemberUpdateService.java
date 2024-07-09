@@ -27,6 +27,6 @@ public class MemberUpdateService {
         return repository
                 .findById(memberId)
                 .orElseThrow(
-                        () -> new BaseException(ExceptionInformation.ID_NOT_FOUND)).toModel();
+                        () -> new BaseException(ExceptionInformation.ID_NO_CONTENT)).toModel();
     }
 }

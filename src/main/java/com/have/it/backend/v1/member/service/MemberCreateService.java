@@ -16,14 +16,9 @@ public class MemberCreateService {
 
     private final MemberRepository repository;
 
-    public void createMember(final MemberCreateRequest memberCreateRequest) {
+    public void registerMember(final MemberCreateRequest memberCreateRequest) {
 
-        final Member member = Member
-                .builder()
-                .email(memberCreateRequest.getEmail())
-                .nickname(memberCreateRequest.getNickname())
-                .password(memberCreateRequest.getPassword())
-                .build();
+        final Member member = Member.of(memberCreateRequest.getEmail(), memberCreateRequest.getNickname(), memberCreateRequest.getPassword());
 
         validateDuplicateEmail(member.getEmail());
 

@@ -1,7 +1,6 @@
 package com.have.it.backend.v1.member.domain.dto.response;
 
 import com.have.it.backend.v1.member.domain.Member;
-import com.have.it.backend.v1.member.infrastructure.member;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -26,6 +25,15 @@ public class MemberReadResponse {
                 .id(member.getId())
                 .email(member.getEmail())
                 .nickname(member.getNickname())
+                .build();
+    }
+
+    public Member toModel() {
+        return Member
+                .builder()
+                .id(id)
+                .email(email)
+                .nickname(nickname)
                 .build();
     }
 }

@@ -20,7 +20,7 @@ public class MemberReadService {
 
         final Member member = repository
                 .findById(memberId)
-                .orElseThrow(() -> new BaseException(ID_NOT_FOUND));
+                .orElseThrow(() -> new BaseException(ID_NO_CONTENT));
 
         return MemberReadResponse.from(member);
     }

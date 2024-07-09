@@ -1,5 +1,6 @@
 package com.have.it.backend.v1.member.domain;
 
+import com.have.it.backend.v1.member.domain.dto.request.MemberCreateRequest;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -26,5 +27,13 @@ public class Member {
                 .builder()
                 .nickname(nickname)
                 .build();
+    }
+
+    public static Member of(String email, String nickname, String password) {
+
+        return Member.builder()
+                .email(email)
+                .nickname(nickname)
+                .password(password).build();
     }
 }

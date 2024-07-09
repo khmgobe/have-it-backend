@@ -9,7 +9,9 @@ import org.springframework.http.HttpStatus;
 public enum ExceptionInformation {
 
 
-    ID_NOT_FOUND("아이디가 존재하지 않습니다", HttpStatus.NOT_FOUND.value()),
+    /* 204: NO_CONTENT */
+    ID_NO_CONTENT("아이디가 존재하지 않습니다", HttpStatus.NOT_FOUND.value()),
+
     MEMBER_NICKNAME_ILLEGAL_LENGTH("올바르지 않은 닉네임 길이입니다.", HttpStatus.BAD_REQUEST.value()),
     MEMBER_EMAIL_ILLEGAL_LENGTH("올바르지 않은 이메일 길이입니다.", HttpStatus.BAD_REQUEST.value()),
     MEMBER_EMAIL_DUPLICATED("이메일이 중복되었습니다.", HttpStatus.CONFLICT.value());
