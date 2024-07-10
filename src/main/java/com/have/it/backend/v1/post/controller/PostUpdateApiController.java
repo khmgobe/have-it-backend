@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class PostUpdateApiController {
 
 
-    private final PostUpdateService postUpdateService;
+    private final PostUpdateService service;
 
-    @PatchMapping("/api/v1/post/{postId}")
-    public ResponseEntity<BaseResponse<Void>> updatePost(@PathVariable("postId") Long postId, @RequestBody PostUpdateRequest postUpdateRequest) {
+    @PatchMapping("/api/v1/post/update/{postId}")
+    public ResponseEntity<BaseResponse<Void>> updatePost(@PathVariable("postId") Long postId, @RequestBody PostUpdateRequest request) {
 
-        postUpdateService.update(postId, postUpdateRequest);
+        service.update(postId, request.getTitle(), request.getContent());
 
         return ResponseEntity
                 .status(HttpStatus.OK)
