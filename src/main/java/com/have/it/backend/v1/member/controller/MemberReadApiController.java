@@ -4,6 +4,7 @@ import com.have.it.backend.v1.common.util.BaseResponse;
 import com.have.it.backend.v1.member.service.MemberReadService;
 import com.have.it.backend.v1.member.domain.dto.response.MemberReadResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +22,7 @@ public class MemberReadApiController {
         MemberReadResponse memberReadResponse = service.findMemberById(memberId);
 
         return ResponseEntity
-                .ok()
+                .status(HttpStatus.OK)
                 .body(BaseResponse.success(memberReadResponse));
     }
 }
