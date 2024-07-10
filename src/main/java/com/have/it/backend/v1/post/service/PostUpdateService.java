@@ -13,15 +13,19 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class PostUpdateService {
 
-    private final PostJpaRepository postRepository;
+    private final PostJpaRepository repository;
 
     public void update (Long postId, String title, String content) {
 
-        final Post post = postRepository
-                .findById(postId)
-                .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
+        final Post post = findPostById(postId);
 
         post.update(title, content);
+    }
 
+    private Post findPostById(final Long postId){
+
+        return repository
+                .findById(postId)
+                .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
     }
 }
