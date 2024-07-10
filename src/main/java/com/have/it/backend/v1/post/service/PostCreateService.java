@@ -3,8 +3,7 @@ package com.have.it.backend.v1.post.service;
 import com.have.it.backend.v1.member.domain.dto.response.MemberReadResponse;
 import com.have.it.backend.v1.member.service.MemberReadService;
 import com.have.it.backend.v1.post.domain.Post;
-import com.have.it.backend.v1.post.domain.dto.request.PostCreateRequest;
-import com.have.it.backend.v1.post.service.port.PostRepository;
+import com.have.it.backend.v1.post.repository.PostJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,15 +13,15 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class PostCreateService {
 
-    private final PostRepository postRepository;
     private final MemberReadService memberReadService;
+    private final PostJpaRepository repository;
 
-    public void registerPost(PostCreateRequest postCreateRequest) {
+    public void registerPost(Long memberId, String title, String content) {
 
-        MemberReadResponse member = memberReadService.findMemberById(postCreateRequest.getMemberId());
+        final MemberReadResponse member = memberReadService.findMemberById(memberId);
 
-        Post post = Post.of(postCreateRequest, member.toModel());
+        final Post post = Post.of(title, content, member.toModel());
 
-        postRepository.save(post);
+        repository.save(post);
     }
 }
