@@ -16,14 +16,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostReadApiController {
 
-    private final PostReadService postReadService;
+    private final PostReadService service;
 
     @GetMapping("/api/v1/post/read/{postId}")
     public ResponseEntity<BaseResponse<PostReadResponse>> readPost(@PathVariable("postId") Long postId) {
 
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(BaseResponse.success(postReadService.findPostById(postId)));
+                .body(BaseResponse.success(service.findPostById(postId)));
     }
 
     @GetMapping("/api/v1/post/read")
@@ -31,6 +31,6 @@ public class PostReadApiController {
 
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(BaseResponse.success(postReadService.findAllPostById()));
+                .body(BaseResponse.success(service.findAll()));
     }
 }
