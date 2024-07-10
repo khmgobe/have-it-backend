@@ -1,5 +1,6 @@
 package com.have.it.backend.v1.post.domain;
 
+import com.have.it.backend.v1.common.util.BaseTimeEntity;
 import com.have.it.backend.v1.member.domain.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Post {
+public class Post extends BaseTimeEntity {
 
 
     @Id
@@ -33,16 +34,6 @@ public class Post {
         this.title = title;
         this.content = content;
         this.writer = writer;
-    }
-
-    public static Post fromModel(Post post) {
-        return Post
-                .builder()
-                .id(post.getId())
-                .title(post.getTitle())
-                .content(post.getContent())
-                .writer(post.getWriter())
-                .build();
     }
 
     public static Post of(String title, String content, Member member) {
