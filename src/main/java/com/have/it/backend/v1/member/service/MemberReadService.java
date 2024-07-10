@@ -7,6 +7,7 @@ import com.have.it.backend.v1.member.repository.MemberJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 import static com.have.it.backend.v1.common.util.enumeration.ExceptionInformation.*;
 
 @Service
@@ -22,6 +23,15 @@ public class MemberReadService {
                 .findById(memberId)
                 .orElseThrow(() -> new BaseException(ID_NO_CONTENT));
 
-        return MemberReadResponse.from(member);
+        return MemberReadResponse.fromModel(member);
+    }
+
+    public List<MemberReadResponse> findAllMember() {
+
+        return repository
+                .findAll()
+                .stream()
+                .map(MemberReadResponse::fromModel)
+                .toList();
     }
 }

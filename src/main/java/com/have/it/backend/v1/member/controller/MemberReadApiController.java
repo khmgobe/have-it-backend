@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class MemberReadApiController {
@@ -17,12 +19,22 @@ public class MemberReadApiController {
     private final MemberReadService service;
 
     @GetMapping("/api/v1/member/read/{memberId}")
-    public ResponseEntity<BaseResponse<MemberReadResponse>> readMember(@PathVariable Long memberId) {
+    public ResponseEntity<BaseResponse<MemberReadResponse>> findMemberById(@PathVariable Long memberId) {
 
         MemberReadResponse memberReadResponse = service.findMemberById(memberId);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(BaseResponse.success(memberReadResponse));
+    }
+
+    @GetMapping("/api/v1/member/read")
+    public ResponseEntity<BaseResponse<List<MemberReadResponse>>> findAllMember() {
+
+        List<MemberReadResponse> memberReadResponseList = service.findAllMember();
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(BaseResponse.success(memberReadResponseList));
     }
 }

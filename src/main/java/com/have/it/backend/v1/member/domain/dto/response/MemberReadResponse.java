@@ -19,7 +19,7 @@ public class MemberReadResponse {
         this.email = email;
     }
 
-    public static MemberReadResponse from(Member member) {
+    public static MemberReadResponse fromModel(Member member) {
         return MemberReadResponse
                 .builder()
                 .id(member.getId())
