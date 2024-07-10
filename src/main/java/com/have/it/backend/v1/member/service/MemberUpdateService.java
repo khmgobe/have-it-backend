@@ -3,7 +3,7 @@ package com.have.it.backend.v1.member.service;
 import com.have.it.backend.v1.common.util.BaseException;
 import com.have.it.backend.v1.common.util.enumeration.ExceptionInformation;
 import com.have.it.backend.v1.member.domain.Member;
-import com.have.it.backend.v1.member.infrastructure.MemberJpaRepository;
+import com.have.it.backend.v1.member.repository.MemberJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,7 @@ public class MemberUpdateService {
 
     public void updateMember(final Long memberId, final String nickname) {
 
-        Member member = findMemberById(memberId);
+        final Member member = findMemberById(memberId);
         member.updateNickname(nickname);
     }
 
@@ -27,6 +27,6 @@ public class MemberUpdateService {
         return repository
                 .findById(memberId)
                 .orElseThrow(
-                        () -> new BaseException(ExceptionInformation.ID_NO_CONTENT)).toModel();
+                        () -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
     }
 }

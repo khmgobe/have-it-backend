@@ -4,6 +4,7 @@ import com.have.it.backend.v1.common.util.BaseResponse;
 import com.have.it.backend.v1.member.domain.dto.request.MemberUpdateRequest;
 import com.have.it.backend.v1.member.service.MemberUpdateService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,8 @@ public class MemberUpdateApiController {
 
         service.updateMember(memberId, memberUpdateRequest.getNickname());
 
-        return ResponseEntity.ok().body(BaseResponse.success(memberId));
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(BaseResponse.success(memberId));
     }
 }
