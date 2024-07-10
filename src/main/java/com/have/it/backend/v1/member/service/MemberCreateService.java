@@ -3,8 +3,7 @@ package com.have.it.backend.v1.member.service;
 import com.have.it.backend.v1.common.util.BaseException;
 import com.have.it.backend.v1.common.util.enumeration.ExceptionInformation;
 import com.have.it.backend.v1.member.domain.Member;
-import com.have.it.backend.v1.member.domain.dto.request.MemberCreateRequest;
-import com.have.it.backend.v1.member.service.port.MemberRepository;
+import com.have.it.backend.v1.member.repository.MemberJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,11 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class MemberCreateService {
 
-    private final MemberRepository repository;
+    private final MemberJpaRepository repository;
 
-    public void registerMember(final MemberCreateRequest memberCreateRequest) {
+    public void registerMember(final String email, final String nickname, final String password) {
 
-        final Member member = Member.of(memberCreateRequest.getEmail(), memberCreateRequest.getNickname(), memberCreateRequest.getPassword());
+        final Member member = Member.of(email, nickname, password);
 
         validateDuplicateEmail(member.getEmail());
 
