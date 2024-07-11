@@ -15,13 +15,14 @@ public class Post extends BaseTimeEntity {
 
 
     @Id
+    @Column(columnDefinition = "BIGINT")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "VARCHAR(30)", nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "VARCHAR(100)", nullable = false)
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
