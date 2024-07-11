@@ -38,7 +38,12 @@ class MemberReadApiControllerTest {
 
             // given
             Long memberId = 1L;
-            MemberReadResponse response = MemberReadResponse.of(memberId, "test_response_nickname", "test_response_email");
+
+            MemberReadResponse response = MemberReadResponse.builder()
+                    .id(memberId)
+                    .nickname("test_response_nickname")
+                    .email("test_response_email")
+                    .build();
 
             given(memberReadService.findMemberById(anyLong())).willReturn(response);
 
@@ -63,8 +68,18 @@ class MemberReadApiControllerTest {
 
         // given
         List<MemberReadResponse> response = List.of(
-                MemberReadResponse.of(1L, "test_nickname", "test_email@naver.com"),
-                MemberReadResponse.of(2L, "good_nickname", "good_email@naver.com"));
+
+                MemberReadResponse.builder()
+                        .id(1L)
+                        .nickname("test_response_nickname")
+                        .email("test_response_email")
+                        .build(),
+
+                MemberReadResponse.builder()
+                        .id(2L)
+                        .nickname("good_nickname")
+                        .email("good_email@naver.com")
+                        .build());
 
         given(memberReadService.findAllMember()).willReturn(response);
 
@@ -78,8 +93,8 @@ class MemberReadApiControllerTest {
         //then
         actions.andExpect(status().isOk())
                 .andExpect(jsonPath("$.data[0].id").value(1L))
-                .andExpect(jsonPath("$.data[0].nickname").value("test_nickname"))
-                .andExpect(jsonPath("$.data[0].email").value("test_email@naver.com"))
+                .andExpect(jsonPath("$.data[0].nickname").value("test_response_nickname"))
+                .andExpect(jsonPath("$.data[0].email").value("test_response_email"))
                 .andExpect(jsonPath("$.data[1].id").value(2L))
                 .andExpect(jsonPath("$.data[1].nickname").value("good_nickname"))
                 .andExpect(jsonPath("$.data[1].email").value("good_email@naver.com"));
