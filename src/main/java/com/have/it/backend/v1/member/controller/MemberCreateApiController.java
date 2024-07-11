@@ -3,6 +3,7 @@ package com.have.it.backend.v1.member.controller;
 import com.have.it.backend.v1.common.util.BaseResponse;
 import com.have.it.backend.v1.member.service.MemberCreateService;
 import com.have.it.backend.v1.member.domain.dto.request.MemberCreateRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class MemberCreateApiController {
     private final MemberCreateService service;
 
     @PostMapping("/api/v1/member/register")
-    public ResponseEntity<BaseResponse<Void>> createMember(@RequestBody MemberCreateRequest request) {
+    public ResponseEntity<BaseResponse<Void>> createMember(@Valid @RequestBody MemberCreateRequest request) {
 
         service.registerMember(request.getEmail(), request.getNickname(), request.getPassword());
 

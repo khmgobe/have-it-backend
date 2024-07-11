@@ -3,6 +3,7 @@ package com.have.it.backend.v1.member.controller;
 import com.have.it.backend.v1.common.util.BaseResponse;
 import com.have.it.backend.v1.member.domain.dto.request.MemberUpdateRequest;
 import com.have.it.backend.v1.member.service.MemberUpdateService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class MemberUpdateApiController {
     private final MemberUpdateService service;
 
     @PatchMapping("api/v1/member/update/{memberId}")
-    public ResponseEntity<BaseResponse<Long>> updateMember (@PathVariable Long memberId, @RequestBody MemberUpdateRequest memberUpdateRequest){
+    public ResponseEntity<BaseResponse<Long>> updateMember (@PathVariable Long memberId, @Valid @RequestBody MemberUpdateRequest memberUpdateRequest){
 
         service.updateMember(memberId, memberUpdateRequest.getNickname());
 
