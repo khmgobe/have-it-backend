@@ -7,7 +7,7 @@
         <h2 style="border-bottom: 1px solid #21262d; color: #c9d1d9;"> 💡 프로젝트 소개 </h2> 
     <div style="margin: ; text-align: left;" "text-align: left;">
     <img src="https://github.com/khmgobe/have-it-backend/assets/98224004/89bf9aa1-d712-437d-b85b-a3f8a40992e3"> <br>
-      "두바이 초콜릿이 먹고싶어, 근데 이거 하나 먹자고 두바이에 갈 수는 없는데.. ? " <br>
+      "두바이 초콜릿이 먹고싶은데.. 이거 먹으려면 두바이 까지 가야되나...? " <br>
 <br>
     먹고싶거나 가지고 싶은 것들에 대해  
     서로 정보를 공유하고 <br> 정보화 사회에 
@@ -23,7 +23,7 @@
     APIDocument : Swagger, Spring Rest Docs 
     </div>
     <div style="text-align: left;">
-    <h2 style="border-bottom: 1px solid #21262d; color: #c9d1d9;"> 🤔 주안점 </h2> <br> 
+    <h2 style="border-bottom: 1px solid #21262d; color: #c9d1d9;"> 🤔 주안점 </h2>
       네이밍 적인 요소에서 확실한 일관성을 두고 식별하기 쉽도록 작성했어요. <br>
       도메인의 계층별 테스트 코드를 작성하여 코드의 신뢰성을 높이기 위해 노력했어요. <br>
       분담하는 역할에 대한 책임을 잘게 쪼개지는 않아도 필요한 요소들끼리 맡게끔 작성했어요. <br>
