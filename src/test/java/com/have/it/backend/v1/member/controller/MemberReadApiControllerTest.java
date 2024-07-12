@@ -1,16 +1,10 @@
 package com.have.it.backend.v1.member.controller;
 
+import com.have.it.backend.util.ApiControllerTestSupport;
 import com.have.it.backend.v1.member.domain.dto.response.MemberReadResponse;
-import com.have.it.backend.v1.member.service.MemberReadService;
-import org.junit.jupiter.api.DisplayNameGeneration;
-import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -22,15 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.mockito.BDDMockito.*;
 
-@WebMvcTest(value = MemberReadApiController.class)
-@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-class MemberReadApiControllerTest {
-
-        @Autowired
-        private MockMvc mockMvc;
-
-        @MockBean
-        private MemberReadService memberReadService;
+class MemberReadApiControllerTest extends ApiControllerTestSupport {
 
         @Test
         @WithMockUser(value = "MEMBER")

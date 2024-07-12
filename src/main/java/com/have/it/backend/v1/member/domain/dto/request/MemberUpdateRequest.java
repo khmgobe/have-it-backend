@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public class MemberUpdateRequest {
 
-    @NotBlank(message = "닉네임은 비어있을 수 없습니다")
+    @NotBlank(message = "닉네임은 비어있을 수 없습니다.")
     private final String nickname;
 
     @Builder
