@@ -18,15 +18,10 @@ public class MemberUpdateService {
 
     public void updateMember(final Long memberId, final String nickname) {
 
-        final Member member = findMemberById(memberId);
-        member.updateNickname(nickname);
-    }
-
-    private Member findMemberById(final Long memberId){
-
-        return repository
+        final Member member = repository
                 .findById(memberId)
-                .orElseThrow(
-                        () -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
+                .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
+
+        member.updateNickname(nickname);
     }
 }

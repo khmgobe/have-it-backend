@@ -14,16 +14,13 @@ public class MemberDeleteService {
 
     private final MemberJpaRepository repository;
 
-    public void deleteMember(Long memberId) {
-
-        validateMemberId(memberId);
-        repository.deleteById(memberId);
-    }
-
-    private void validateMemberId(Long memberId) {
+    public void deleteMember(final Long memberId) {
 
         repository
                 .findById(memberId)
                 .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
+
+        repository.deleteById(memberId);
+
     }
 }

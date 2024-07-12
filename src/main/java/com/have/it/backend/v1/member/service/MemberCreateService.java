@@ -19,18 +19,13 @@ public class MemberCreateService {
 
     public void registerMember(final String email, final String nickname, final String password) {
 
-        final Member member = Member.of(email, nickname, passwordEncoder.encode(password));
-
-        validateDuplicateEmail(member.getEmail());
-
-        repository.save(member);
-
-    }
-
-    private void validateDuplicateEmail(String email) {
-
         if(repository.existsByEmail(email)) {
             throw new BaseException(ExceptionInformation.EMAIL_DUPLICATED);
         }
+
+        final Member member = Member.of(email, nickname, passwordEncoder.encode(password));
+
+        repository.save(member);
+
     }
 }
