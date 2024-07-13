@@ -1,7 +1,7 @@
 package com.have.it.backend.v1.member.controller;
 
 import com.have.it.backend.util.ApiControllerTestSupport;
-import com.have.it.backend.v1.member.domain.dto.request.MemberCreateRequest;
+import com.have.it.backend.v1.member.dto.request.MemberCreateRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -32,7 +32,7 @@ class MemberCreateApiControllerTest extends ApiControllerTestSupport {
                         .password("testPassword")
                         .build();
 
-        willDoNothing().given(memberCreateService).registerMember(anyString(), anyString(), anyString());
+        willDoNothing().given(memberCreateService).registerMember(any());
 
         // when
         ResultActions actions = mockMvc.perform(post("/api/v1/member/register")
@@ -44,7 +44,7 @@ class MemberCreateApiControllerTest extends ApiControllerTestSupport {
 
         //then
         actions.andExpect(status().isCreated());
-        verify(memberCreateService, times(1)).registerMember(anyString(), anyString(), anyString());
+        verify(memberCreateService, times(1)).registerMember(any());
     }
 
     @Test
@@ -60,7 +60,7 @@ class MemberCreateApiControllerTest extends ApiControllerTestSupport {
                         .password(null)
                         .build();
 
-        willDoNothing().given(memberCreateService).registerMember(anyString(), anyString(), anyString());
+        willDoNothing().given(memberCreateService).registerMember(any());
 
         // when
         ResultActions actions = mockMvc.perform(post("/api/v1/member/register")
@@ -77,7 +77,7 @@ class MemberCreateApiControllerTest extends ApiControllerTestSupport {
 
         //then
         actions.andExpect(status().isBadRequest());
-        verify(memberCreateService, times(0)).registerMember(anyString(), anyString(), anyString());
+        verify(memberCreateService, times(0)).registerMember(any());
     }
 
     @Test
@@ -93,7 +93,7 @@ class MemberCreateApiControllerTest extends ApiControllerTestSupport {
                         .password(" ")
                         .build();
 
-        willDoNothing().given(memberCreateService).registerMember(anyString(), anyString(), anyString());
+        willDoNothing().given(memberCreateService).registerMember(any());
 
         // when
         ResultActions actions = mockMvc.perform(post("/api/v1/member/register")
@@ -110,6 +110,6 @@ class MemberCreateApiControllerTest extends ApiControllerTestSupport {
 
         //then
         actions.andExpect(status().isBadRequest());
-        verify(memberCreateService, times(0)).registerMember(anyString(), anyString(), anyString());
+        verify(memberCreateService, times(0)).registerMember(any());
     }
 }
