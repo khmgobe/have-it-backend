@@ -3,7 +3,6 @@ package com.have.it.backend.v1.member.domain;
 import com.have.it.backend.v1.common.util.BaseException;
 import com.have.it.backend.v1.common.util.BaseTimeEntity;
 import com.have.it.backend.v1.common.util.enumeration.ExceptionInformation;
-import com.have.it.backend.v1.member.domain.dto.request.MemberCreateRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -17,10 +16,7 @@ import java.util.Objects;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member extends BaseTimeEntity {
 
-
-    private static final int MAX_EMAIL_LENGTH = 30;
     private static final int MAX_NICKNAME_LENGTH = 15;
-    private static final int MAX_PASSWORD_LENGTH = 15;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,7 +40,7 @@ public class Member extends BaseTimeEntity {
         this.password = password;
     }
 
-    public static Member of(String email, String nickname, String password) {
+    public static Member fromCreate(String email, String nickname, String password) {
         return Member
                 .builder()
                 .email(email)
@@ -62,14 +58,5 @@ public class Member extends BaseTimeEntity {
         if(Objects.isNull(nickname) || nickname.length() > MAX_NICKNAME_LENGTH) {
             throw new BaseException(ExceptionInformation.NICKNAME_ILLEGAL_LENGTH);
         }
-    }
-
-    public static Member fromCreate(MemberCreateRequest memberCreateRequest) {
-        return Member
-                .builder()
-                .email(memberCreateRequest.getEmail())
-                .nickname(memberCreateRequest.getNickname())
-                .password(memberCreateRequest.getPassword())
-                .build();
     }
 }
