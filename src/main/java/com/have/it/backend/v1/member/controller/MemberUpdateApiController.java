@@ -1,8 +1,8 @@
 package com.have.it.backend.v1.member.controller;
 
 import com.have.it.backend.v1.common.util.BaseResponse;
-import com.have.it.backend.v1.member.domain.dto.request.MemberUpdateRequest;
-import com.have.it.backend.v1.member.service.MemberUpdateService;
+import com.have.it.backend.v1.member.dto.request.MemberUpdateRequest;
+import com.have.it.backend.v1.member.service.usecase.MemberUpdateUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class MemberUpdateApiController {
 
-    private final MemberUpdateService service;
+    private final MemberUpdateUseCase memberUpdateUseCase;
 
     @PatchMapping("api/v1/member/update/{memberId}")
     public ResponseEntity<BaseResponse<Long>> updateMember (@PathVariable Long memberId, @Valid @RequestBody MemberUpdateRequest memberUpdateRequest){
 
-        service.updateMember(memberId, memberUpdateRequest.getNickname());
+        memberUpdateUseCase.updateMember(memberId, memberUpdateRequest.toServiceRequest());
 
         return ResponseEntity
                 .status(HttpStatus.OK)

@@ -1,14 +1,14 @@
 package com.have.it.backend.v1.member.controller;
 
 import com.have.it.backend.util.ApiControllerTestSupport;
-import com.have.it.backend.v1.member.domain.dto.request.MemberUpdateRequest;
+import com.have.it.backend.v1.member.dto.request.MemberUpdateRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.ResultActions;
 import java.nio.charset.StandardCharsets;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
+
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.willDoNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -33,7 +33,7 @@ class MemberUpdateApiControllerTest extends ApiControllerTestSupport {
                         .nickname("test_member_nickname")
                         .build();
 
-        willDoNothing().given(memberUpdateService).updateMember(anyLong(), anyString());
+        willDoNothing().given(memberUpdateService).updateMember(anyLong(), any());
 
         // when
         ResultActions actions = mockMvc.perform(patch("/api/v1/member/update/{memberId}", memberId)
@@ -45,7 +45,7 @@ class MemberUpdateApiControllerTest extends ApiControllerTestSupport {
 
         //then
         actions.andExpect(status().isOk());
-        verify(memberUpdateService, times(1)).updateMember(anyLong(), anyString());
+        verify(memberUpdateService, times(1)).updateMember(anyLong(), any());
     }
 
     @Test
@@ -61,7 +61,7 @@ class MemberUpdateApiControllerTest extends ApiControllerTestSupport {
                         .nickname(null)
                         .build();
 
-        willDoNothing().given(memberUpdateService).updateMember(anyLong(), anyString());
+        willDoNothing().given(memberUpdateService).updateMember(anyLong(), any());
 
         // when
         ResultActions actions = mockMvc.perform(patch("/api/v1/member/update/{memberId}", memberId)
@@ -76,7 +76,7 @@ class MemberUpdateApiControllerTest extends ApiControllerTestSupport {
 
         //then
         actions.andExpect(status().isBadRequest());
-        verify(memberUpdateService, times(0)).updateMember(anyLong(), anyString());
+        verify(memberUpdateService, times(0)).updateMember(anyLong(), any());
     }
 
     @Test
@@ -92,7 +92,7 @@ class MemberUpdateApiControllerTest extends ApiControllerTestSupport {
                         .nickname(" ")
                         .build();
 
-        willDoNothing().given(memberUpdateService).updateMember(anyLong(), anyString());
+        willDoNothing().given(memberUpdateService).updateMember(anyLong(), any());
 
         // when
         ResultActions actions = mockMvc.perform(patch("/api/v1/member/update/{memberId}", memberId)
@@ -107,7 +107,7 @@ class MemberUpdateApiControllerTest extends ApiControllerTestSupport {
 
         //then
         actions.andExpect(status().isBadRequest());
-        verify(memberUpdateService, times(0)).updateMember(anyLong(), anyString());
+        verify(memberUpdateService, times(0)).updateMember(anyLong(), any());
     }
 
 }
