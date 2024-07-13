@@ -1,6 +1,6 @@
 package com.have.it.backend.v1.post.service;
 
-import com.have.it.backend.v1.member.domain.dto.response.MemberReadResponse;
+import com.have.it.backend.v1.member.dto.response.MemberReadResponse;
 import com.have.it.backend.v1.member.service.MemberReadService;
 import com.have.it.backend.v1.post.domain.Post;
 import com.have.it.backend.v1.post.repository.PostJpaRepository;
