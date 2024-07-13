@@ -1,23 +1,14 @@
-package com.have.it.backend.v1.member.domain.dto.response;
+package com.have.it.backend.v1.member.dto.response;
 
 import com.have.it.backend.v1.member.domain.Member;
 import lombok.Builder;
-import lombok.Getter;
 
-@Getter
-public class MemberReadResponse {
-
-    private final Long id;
-    private final String nickname;
-    private final String email;
-
-
-    @Builder
-    private MemberReadResponse(Long id, String nickname, String email) {
-        this.id = id;
-        this.nickname = nickname;
-        this.email = email;
-    }
+@Builder
+public record MemberReadResponse (
+                    Long id,
+                    String nickname,
+                    String email)
+{
 
     public static MemberReadResponse fromModel(Member member) {
         return MemberReadResponse
