@@ -1,7 +1,7 @@
 package com.have.it.backend.v1.member.controller;
 
 import com.have.it.backend.util.ApiControllerTestSupport;
-import com.have.it.backend.v1.member.domain.dto.response.MemberReadResponse;
+import com.have.it.backend.v1.member.dto.response.MemberReadResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -43,8 +43,8 @@ class MemberReadApiControllerTest extends ApiControllerTestSupport {
             //then
             actions.andExpect(status().isOk())
                     .andExpect(jsonPath("$.data.id").value(memberId))
-                    .andExpect(jsonPath("$.data.nickname").value(response.getNickname()))
-                    .andExpect(jsonPath("$.data.email").value(response.getEmail()));
+                    .andExpect(jsonPath("$.data.nickname").value(response.nickname()))
+                    .andExpect(jsonPath("$.data.email").value(response.email()));
             verify(memberReadService, times(1)).findMemberById(anyLong());
         }
 
