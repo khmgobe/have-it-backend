@@ -18,8 +18,7 @@ public class PostReadService {
     public PostReadResponse findPostById(Long id) {
 
         final Post post = repository
-                .findById(id).orElseThrow(
-                        () -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
+                .findById(id).orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
 
         return PostReadResponse.from(post);
     }

@@ -1,6 +1,7 @@
 package com.have.it.backend.v1.member.domain.dto.response;
 
 import com.have.it.backend.v1.member.domain.Member;
+import com.have.it.backend.v1.member.dto.response.MemberReadResponse;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;

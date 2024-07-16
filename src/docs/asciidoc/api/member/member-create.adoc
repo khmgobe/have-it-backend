@@ -1,0 +1,21 @@
+ifndef::snippets[]
+:snippets: ../../build/generated-snippets
+endif::[]
+= have-it BackEnd 멤버 등록 API 문서
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[member-create]]
+=== 멤버 등록
+
+==== HTTP Request
+include::{snippets}/member-create/http-request.adoc[]
+include::{snippets}/member-create/request-fields.adoc[]
+
+==== HTTP Response
+include::{snippets}/member-create/http-response.adoc[]
+include::{snippets}/member-create/response-fields.adoc[]

@@ -1,8 +1,8 @@
 package com.have.it.backend.v1.member.controller;
 
 import com.have.it.backend.v1.common.util.BaseResponse;
-import com.have.it.backend.v1.member.service.MemberReadService;
-import com.have.it.backend.v1.member.domain.dto.response.MemberReadResponse;
+import com.have.it.backend.v1.member.dto.response.MemberReadResponse;
+import com.have.it.backend.v1.member.service.usecase.MemberReadUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +16,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberReadApiController {
 
-    private final MemberReadService service;
+    private final MemberReadUseCase memberReadUseCase;
 
     @GetMapping("/api/v1/member/read/{memberId}")
     public ResponseEntity<BaseResponse<MemberReadResponse>> findMemberById(@PathVariable Long memberId) {
 
-        MemberReadResponse memberReadResponse = service.findMemberById(memberId);
+        MemberReadResponse memberReadResponse = memberReadUseCase.findMemberById(memberId);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -31,7 +31,7 @@ public class MemberReadApiController {
     @GetMapping("/api/v1/member/read")
     public ResponseEntity<BaseResponse<List<MemberReadResponse>>> findAllMember() {
 
-        List<MemberReadResponse> memberReadResponseList = service.findAllMember();
+        List<MemberReadResponse> memberReadResponseList = memberReadUseCase.findAllMember();
 
         return ResponseEntity
                 .status(HttpStatus.OK)
