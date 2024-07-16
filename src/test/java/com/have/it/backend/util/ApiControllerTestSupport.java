@@ -6,10 +6,10 @@ import com.have.it.backend.v1.member.controller.MemberCreateApiController;
 import com.have.it.backend.v1.member.controller.MemberDeleteApiController;
 import com.have.it.backend.v1.member.controller.MemberReadApiController;
 import com.have.it.backend.v1.member.controller.MemberUpdateApiController;
-import com.have.it.backend.v1.member.service.MemberCreateService;
-import com.have.it.backend.v1.member.service.MemberDeleteService;
-import com.have.it.backend.v1.member.service.MemberReadService;
-import com.have.it.backend.v1.member.service.MemberUpdateService;
+import com.have.it.backend.v1.member.service.usecase.MemberCreateUseCase;
+import com.have.it.backend.v1.member.service.usecase.MemberDeleteUseCase;
+import com.have.it.backend.v1.member.service.usecase.MemberReadUseCase;
+import com.have.it.backend.v1.member.service.usecase.MemberUpdateUseCase;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,16 +34,14 @@ public abstract class ApiControllerTestSupport {
     protected ObjectMapper objectMapper;
 
     @MockBean
-    protected MemberCreateService memberCreateService;
+    protected MemberCreateUseCase memberCreateUseCase;
 
     @MockBean
-    protected MemberReadService memberReadService;
+    protected MemberReadUseCase memberReadUseCase;
 
     @MockBean
-    protected MemberUpdateService memberUpdateService;
+    protected MemberUpdateUseCase memberUpdateUseCase;
 
     @MockBean
-    protected MemberDeleteService memberDeleteService;
-
-
+    protected MemberDeleteUseCase memberDeleteUseCase;
 }
