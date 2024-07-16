@@ -1,0 +1,30 @@
+ifndef::snippets[]
+:snippets: ../../build/generated-snippets
+endif::[]
+= have-it BackEnd 멤버 조회 API 문서
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[member-create]]
+=== 멤버 조회
+
+==== HTTP Request
+include::{snippets}/member-read/http-request.adoc[]
+include::{snippets}/member-read/request-fields.adoc[]
+
+==== HTTP Response
+include::{snippets}/member-read/http-response.adoc[]
+include::{snippets}/member-read/response-fields.adoc[]
+
+=== 멤버 전체 조회
+
+==== HTTP Request
+include::{snippets}/member-readAll/http-request.adoc[]
+
+==== HTTP Response
+include::{snippets}/member-readAll/http-response.adoc[]
+include::{snippets}/member-readAll/response-fields.adoc[]
