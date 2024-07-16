@@ -33,7 +33,7 @@ class MemberUpdateApiControllerTest extends ApiControllerTestSupport {
                         .nickname("test_member_nickname")
                         .build();
 
-        willDoNothing().given(memberUpdateService).updateMember(anyLong(), any());
+        willDoNothing().given(memberUpdateUseCase).updateMember(anyLong(), any());
 
         // when
         ResultActions actions = mockMvc.perform(patch("/api/v1/member/update/{memberId}", memberId)
@@ -45,7 +45,7 @@ class MemberUpdateApiControllerTest extends ApiControllerTestSupport {
 
         //then
         actions.andExpect(status().isOk());
-        verify(memberUpdateService, times(1)).updateMember(anyLong(), any());
+        verify(memberUpdateUseCase, times(1)).updateMember(anyLong(), any());
     }
 
     @Test
@@ -61,7 +61,7 @@ class MemberUpdateApiControllerTest extends ApiControllerTestSupport {
                         .nickname(null)
                         .build();
 
-        willDoNothing().given(memberUpdateService).updateMember(anyLong(), any());
+        willDoNothing().given(memberUpdateUseCase).updateMember(anyLong(), any());
 
         // when
         ResultActions actions = mockMvc.perform(patch("/api/v1/member/update/{memberId}", memberId)
@@ -76,7 +76,7 @@ class MemberUpdateApiControllerTest extends ApiControllerTestSupport {
 
         //then
         actions.andExpect(status().isBadRequest());
-        verify(memberUpdateService, times(0)).updateMember(anyLong(), any());
+        verify(memberUpdateUseCase, times(0)).updateMember(anyLong(), any());
     }
 
     @Test
@@ -92,7 +92,7 @@ class MemberUpdateApiControllerTest extends ApiControllerTestSupport {
                         .nickname(" ")
                         .build();
 
-        willDoNothing().given(memberUpdateService).updateMember(anyLong(), any());
+        willDoNothing().given(memberUpdateUseCase).updateMember(anyLong(), any());
 
         // when
         ResultActions actions = mockMvc.perform(patch("/api/v1/member/update/{memberId}", memberId)
@@ -107,7 +107,7 @@ class MemberUpdateApiControllerTest extends ApiControllerTestSupport {
 
         //then
         actions.andExpect(status().isBadRequest());
-        verify(memberUpdateService, times(0)).updateMember(anyLong(), any());
+        verify(memberUpdateUseCase, times(0)).updateMember(anyLong(), any());
     }
 
 }

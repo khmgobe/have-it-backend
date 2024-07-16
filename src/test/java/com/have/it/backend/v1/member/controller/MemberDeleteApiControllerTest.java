@@ -25,7 +25,7 @@ class MemberDeleteApiControllerTest extends ApiControllerTestSupport {
         // given
         Long memberId = 1L;
 
-        willDoNothing().given(memberDeleteService).deleteMember(anyLong());
+        willDoNothing().given(memberDeleteUseCase).deleteMember(anyLong());
 
         // when
         ResultActions actions = mockMvc.perform(delete("/api/v1/member/delete/{memberId}", memberId)
@@ -36,6 +36,6 @@ class MemberDeleteApiControllerTest extends ApiControllerTestSupport {
 
         //then
         actions.andExpect(status().isOk());
-        verify(memberDeleteService, times(1)).deleteMember(anyLong());
+        verify(memberDeleteUseCase, times(1)).deleteMember(anyLong());
     }
 }

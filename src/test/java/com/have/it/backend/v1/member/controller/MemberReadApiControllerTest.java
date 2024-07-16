@@ -31,7 +31,7 @@ class MemberReadApiControllerTest extends ApiControllerTestSupport {
                     .email("test_response_email")
                     .build();
 
-            given(memberReadService.findMemberById(anyLong())).willReturn(response);
+            given(memberReadUseCase.findMemberById(anyLong())).willReturn(response);
 
             // when
             ResultActions actions = mockMvc.perform(get("/api/v1/member/read/{memberId}", memberId)
@@ -45,7 +45,7 @@ class MemberReadApiControllerTest extends ApiControllerTestSupport {
                     .andExpect(jsonPath("$.data.id").value(memberId))
                     .andExpect(jsonPath("$.data.nickname").value(response.nickname()))
                     .andExpect(jsonPath("$.data.email").value(response.email()));
-            verify(memberReadService, times(1)).findMemberById(anyLong());
+            verify(memberReadUseCase, times(1)).findMemberById(anyLong());
         }
 
     @Test
@@ -67,7 +67,7 @@ class MemberReadApiControllerTest extends ApiControllerTestSupport {
                         .email("good_email@naver.com")
                         .build());
 
-        given(memberReadService.findAllMember()).willReturn(response);
+        given(memberReadUseCase.findAllMember()).willReturn(response);
 
         // when
         ResultActions actions = mockMvc.perform(get("/api/v1/member/read")
@@ -85,6 +85,6 @@ class MemberReadApiControllerTest extends ApiControllerTestSupport {
                 .andExpect(jsonPath("$.data[1].nickname").value("good_nickname"))
                 .andExpect(jsonPath("$.data[1].email").value("good_email@naver.com"));
 
-        verify(memberReadService, times(1)).findAllMember();
+        verify(memberReadUseCase, times(1)).findAllMember();
     }
 }
