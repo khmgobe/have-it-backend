@@ -4,7 +4,6 @@ plugins {
     id 'io.spring.dependency-management' version '1.1.5'
     id 'org.asciidoctor.jvm.convert' version '3.3.2'
     id 'com.epages.restdocs-api-spec' version '0.18.4'
-
 }
 
 group = 'com'
@@ -32,7 +31,6 @@ ext {
 }
 
 dependencies {
-
     // spring data jpa
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
@@ -70,7 +68,6 @@ dependencies {
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
 
     asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
-
 }
 
 tasks.named('test') {
@@ -81,6 +78,13 @@ tasks.named('test') {
 tasks.named('asciidoctor') {
     inputs.dir snippetsDir
     dependsOn test
+    configurations 'asciidoctorExt'
+
+    sources {
+        include("**/index.adoc")
+    }
+
+    baseDirFollowsSourceFile()
 }
 
 ext {
@@ -91,21 +95,19 @@ test {
     outputs.dir snippetsDir
 }
 
-asciidoctor {
-    inputs.dir snippetsDir
-    configurations 'asciidoctorExt'
-
-    sources {
-        include("**/index.adoc")
-    }
-
-    baseDirFollowsSourceFile()
-    dependsOn test
-}
-
 bootJar {
     dependsOn asciidoctor
     from("${asciidoctor.outputDir}") {
         into 'static/docs'
     }
+}
+
+tasks.register('copyDocs', Copy) {
+    dependsOn asciidoctor
+    from("${asciidoctor.outputDir}")
+    into 'src/main/resources/static'
+}
+
+bootJar {
+    dependsOn copyDocs
 }
