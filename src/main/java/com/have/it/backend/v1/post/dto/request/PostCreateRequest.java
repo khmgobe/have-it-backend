@@ -1,4 +1,4 @@
-package com.have.it.backend.v1.post.domain.dto.request;
+package com.have.it.backend.v1.post.dto.request;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

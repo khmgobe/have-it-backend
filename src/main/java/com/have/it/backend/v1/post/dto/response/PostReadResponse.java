@@ -1,4 +1,4 @@
-package com.have.it.backend.v1.post.domain.dto.response;
+package com.have.it.backend.v1.post.dto.response;
 
 import com.have.it.backend.v1.post.domain.Post;
 import lombok.Builder;

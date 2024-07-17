@@ -2,7 +2,7 @@ package com.have.it.backend.v1.post.service;
 
 import com.have.it.backend.v1.common.util.BaseException;
 import com.have.it.backend.v1.common.util.enumeration.ExceptionInformation;
-import com.have.it.backend.v1.post.domain.dto.response.PostReadResponse;
+import com.have.it.backend.v1.post.dto.response.PostReadResponse;
 import com.have.it.backend.v1.post.domain.Post;
 import com.have.it.backend.v1.post.repository.PostJpaRepository;
 import lombok.RequiredArgsConstructor;

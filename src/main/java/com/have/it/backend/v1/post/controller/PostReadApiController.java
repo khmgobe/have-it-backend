@@ -1,7 +1,7 @@
 package com.have.it.backend.v1.post.controller;
 
 import com.have.it.backend.v1.common.util.BaseResponse;
-import com.have.it.backend.v1.post.domain.dto.response.PostReadResponse;
+import com.have.it.backend.v1.post.dto.response.PostReadResponse;
 import com.have.it.backend.v1.post.service.PostReadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
