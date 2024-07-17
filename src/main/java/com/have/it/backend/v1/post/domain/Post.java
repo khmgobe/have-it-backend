@@ -1,6 +1,7 @@
 package com.have.it.backend.v1.post.domain;
 
 import com.have.it.backend.v1.common.util.BaseTimeEntity;
+import com.have.it.backend.v1.folder.domain.enumeration.Folder;
 import com.have.it.backend.v1.member.domain.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -28,6 +29,10 @@ public class Post extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private Member writer;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
+    private Folder folder;
 
     @Builder
     private Post(Long id, String title, String content, Member writer) {
