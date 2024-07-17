@@ -10,10 +10,19 @@ endif::[]
 :sectlinks:
 
 [[MEMBER-API]]
-=== Product API
+=== Member API
 
 
 include::api/member/member-create.adoc[]
 include::api/member/member-read.adoc[]
 include::api/member/member-update.adoc[]
 include::api/member/member-delete.adoc[]
+
+[[POST-API]]
+=== Post API
+include::api/post/post-create.adoc[]
+include::api/post/post-read.adoc[]
+include::api/post/post-update.adoc[]
+include::api/post/post-delete.adoc[]
+
+
