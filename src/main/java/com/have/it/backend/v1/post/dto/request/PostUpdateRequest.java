@@ -1,18 +1,14 @@
 package com.have.it.backend.v1.post.dto.request;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
-import lombok.Getter;
 
-@Getter
-public class PostUpdateRequest {
+@Builder
+public record PostUpdateRequest (
 
-    private final String title;
-    private final String content;
-
-    @Builder
-    private PostUpdateRequest(String title, String content) {
-        this.title = title;
-        this.content = content;
-    }
+    @NotBlank(message = "제목은 비어있을 수 없습니다.")
+    String title,
+    @NotBlank(message = "내용은 비어있을 수 없습니다.")
+    String content) {
 
 }
