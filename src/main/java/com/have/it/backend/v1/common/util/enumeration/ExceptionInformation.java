@@ -19,7 +19,8 @@ public enum ExceptionInformation {
     PASSWORD_ILLEGAL_LENGTH("올바르지 않은 비밀번호 길이입니다.", HttpStatus.BAD_REQUEST.value()),
 
     /* 409: CONFLICT */
-    EMAIL_DUPLICATED("이메일이 중복되었습니다.", HttpStatus.CONFLICT.value());
+    EMAIL_DUPLICATED("이메일이 중복되었습니다.", HttpStatus.CONFLICT.value()),
+    FOLDER_TITLE_DUPLICATED("폴더 제목이 중복되었습니다.", HttpStatus.CONFLICT.value());
 
     private final String message;
     private final Integer status;
