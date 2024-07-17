@@ -4,6 +4,7 @@ import com.have.it.backend.v1.member.dto.response.MemberReadResponse;
 import com.have.it.backend.v1.member.service.usecase.MemberReadUseCase;
 import com.have.it.backend.v1.post.domain.Post;
 import com.have.it.backend.v1.post.repository.PostJpaRepository;
+import com.have.it.backend.v1.post.service.usecase.PostCreateUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,11 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class PostCreateService {
+public class PostCreateService implements PostCreateUseCase {
 
     private final MemberReadUseCase memberReadUseCase;
     private final PostJpaRepository repository;
 
+    @Override
     public void registerPost(Long memberId, String title, String content) {
 
         final MemberReadResponse member = memberReadUseCase.findMemberById(memberId);

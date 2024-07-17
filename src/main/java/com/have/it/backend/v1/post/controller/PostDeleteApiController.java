@@ -1,7 +1,7 @@
 package com.have.it.backend.v1.post.controller;
 
 import com.have.it.backend.v1.common.util.BaseResponse;
-import com.have.it.backend.v1.post.service.PostDeleteService;
+import com.have.it.backend.v1.post.service.usecase.PostDeleteUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class PostDeleteApiController {
 
-    private final PostDeleteService service;
+    private final PostDeleteUseCase postDeleteUseCase;
 
     @DeleteMapping("/api/v1/post/delete/{postId}")
     public ResponseEntity<BaseResponse<Long>> delete(@PathVariable("postId") Long postId) {
 
-        service.deleteById(postId);
+        postDeleteUseCase.deleteById(postId);
 
         return ResponseEntity
                 .status(HttpStatus.OK)

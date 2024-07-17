@@ -5,16 +5,18 @@ import com.have.it.backend.v1.common.util.enumeration.ExceptionInformation;
 import com.have.it.backend.v1.post.dto.response.PostReadResponse;
 import com.have.it.backend.v1.post.domain.Post;
 import com.have.it.backend.v1.post.repository.PostJpaRepository;
+import com.have.it.backend.v1.post.service.usecase.PostReadUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PostReadService {
+public class PostReadService implements PostReadUseCase {
 
     private final PostJpaRepository repository;
 
+    @Override
     public PostReadResponse findPostById(Long id) {
 
         final Post post = repository
@@ -23,6 +25,7 @@ public class PostReadService {
         return PostReadResponse.from(post);
     }
 
+    @Override
     public List<PostReadResponse> findAll() {
         return repository
                 .findAll()
