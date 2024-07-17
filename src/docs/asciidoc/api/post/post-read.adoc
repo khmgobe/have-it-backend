@@ -1,0 +1,30 @@
+ifndef::snippets[]
+:snippets: ../../build/generated-snippets
+endif::[]
+= have-it BackEnd 게시글 조회 API 문서
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[post-create]]
+=== 게시글 조회
+
+==== HTTP Request
+include::{snippets}/post-read/http-request.adoc[]
+include::{snippets}/post-read/request-fields.adoc[]
+
+==== HTTP Response
+include::{snippets}/post-read/http-response.adoc[]
+include::{snippets}/post-read/response-fields.adoc[]
+
+=== 게시글 전체 조회
+
+==== HTTP Request
+include::{snippets}/post-readAll/http-request.adoc[]
+
+==== HTTP Response
+include::{snippets}/post-readAll/http-response.adoc[]
+include::{snippets}/post-readAll/response-fields.adoc[]
