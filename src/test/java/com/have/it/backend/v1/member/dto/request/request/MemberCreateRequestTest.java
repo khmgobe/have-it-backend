@@ -1,4 +1,4 @@
-package com.have.it.backend.v1.member.domain.dto.request;
+package com.have.it.backend.v1.member.dto.request.request;
 
 
 import com.have.it.backend.v1.member.domain.Member;
