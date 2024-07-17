@@ -1,16 +1,10 @@
 package com.have.it.backend.v1.member.controller;
 
-import com.have.it.backend.v1.member.domain.dto.response.MemberReadResponse;
-import com.have.it.backend.v1.member.service.MemberReadService;
-import org.junit.jupiter.api.DisplayNameGeneration;
-import org.junit.jupiter.api.DisplayNameGenerator;
+import com.have.it.backend.util.ApiControllerTestSupport;
+import com.have.it.backend.v1.member.dto.response.MemberReadResponse;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -22,15 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.mockito.BDDMockito.*;
 
-@WebMvcTest(value = MemberReadApiController.class)
-@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-class MemberReadApiControllerTest {
-
-        @Autowired
-        private MockMvc mockMvc;
-
-        @MockBean
-        private MemberReadService memberReadService;
+class MemberReadApiControllerTest extends ApiControllerTestSupport {
 
         @Test
         @WithMockUser(value = "MEMBER")
@@ -45,7 +31,7 @@ class MemberReadApiControllerTest {
                     .email("test_response_email")
                     .build();
 
-            given(memberReadService.findMemberById(anyLong())).willReturn(response);
+            given(memberReadUseCase.findMemberById(anyLong())).willReturn(response);
 
             // when
             ResultActions actions = mockMvc.perform(get("/api/v1/member/read/{memberId}", memberId)
@@ -57,9 +43,9 @@ class MemberReadApiControllerTest {
             //then
             actions.andExpect(status().isOk())
                     .andExpect(jsonPath("$.data.id").value(memberId))
-                    .andExpect(jsonPath("$.data.nickname").value(response.getNickname()))
-                    .andExpect(jsonPath("$.data.email").value(response.getEmail()));
-            verify(memberReadService, times(1)).findMemberById(anyLong());
+                    .andExpect(jsonPath("$.data.nickname").value(response.nickname()))
+                    .andExpect(jsonPath("$.data.email").value(response.email()));
+            verify(memberReadUseCase, times(1)).findMemberById(anyLong());
         }
 
     @Test
@@ -81,7 +67,7 @@ class MemberReadApiControllerTest {
                         .email("good_email@naver.com")
                         .build());
 
-        given(memberReadService.findAllMember()).willReturn(response);
+        given(memberReadUseCase.findAllMember()).willReturn(response);
 
         // when
         ResultActions actions = mockMvc.perform(get("/api/v1/member/read")
@@ -99,6 +85,6 @@ class MemberReadApiControllerTest {
                 .andExpect(jsonPath("$.data[1].nickname").value("good_nickname"))
                 .andExpect(jsonPath("$.data[1].email").value("good_email@naver.com"));
 
-        verify(memberReadService, times(1)).findAllMember();
+        verify(memberReadUseCase, times(1)).findAllMember();
     }
 }

@@ -1,8 +1,8 @@
 package com.have.it.backend.v1.member.controller;
 
 import com.have.it.backend.v1.common.util.BaseResponse;
-import com.have.it.backend.v1.member.service.MemberCreateService;
-import com.have.it.backend.v1.member.domain.dto.request.MemberCreateRequest;
+import com.have.it.backend.v1.member.dto.request.MemberCreateRequest;
+import com.have.it.backend.v1.member.service.usecase.MemberCreateUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class MemberCreateApiController {
 
-    private final MemberCreateService service;
+    private final MemberCreateUseCase memberCreateUseCase;
 
-    @PostMapping("/api/v1/member/register")
+    @PostMapping(path = "/api/v1/member/register")
     public ResponseEntity<BaseResponse<Void>> createMember(@Valid @RequestBody MemberCreateRequest request) {
 
-        service.registerMember(request.getEmail(), request.getNickname(), request.getPassword());
+        memberCreateUseCase.registerMember(request.toServiceRequest());
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)

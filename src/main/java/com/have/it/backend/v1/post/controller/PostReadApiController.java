@@ -1,8 +1,8 @@
 package com.have.it.backend.v1.post.controller;
 
 import com.have.it.backend.v1.common.util.BaseResponse;
-import com.have.it.backend.v1.post.domain.dto.response.PostReadResponse;
-import com.have.it.backend.v1.post.service.PostReadService;
+import com.have.it.backend.v1.post.dto.response.PostReadResponse;
+import com.have.it.backend.v1.post.service.usecase.PostReadUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,14 +16,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostReadApiController {
 
-    private final PostReadService service;
+    private final PostReadUseCase postReadUseCase;
 
-    @GetMapping("/api/v1/post/read/{postId}")
+    @GetMapping(path = "/api/v1/post/read/{postId}")
     public ResponseEntity<BaseResponse<PostReadResponse>> readPost(@PathVariable("postId") Long postId) {
 
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(BaseResponse.success(service.findPostById(postId)));
+                .body(BaseResponse.success(postReadUseCase.findPostById(postId)));
     }
 
     @GetMapping("/api/v1/post/read")
@@ -31,6 +31,6 @@ public class PostReadApiController {
 
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(BaseResponse.success(service.findAll()));
+                .body(BaseResponse.success(postReadUseCase.findAll()));
     }
 }

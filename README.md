@@ -1,3 +1,4 @@
+# [📄 have-it API 문서 링크](https://khmgobe.github.io/have-it-backend/src/main/resources/static)
 <div align= "center">
     </div>
     <div style="text-align:left;">   
@@ -19,7 +20,7 @@
     <div style="margin: ; text-align: left;" "text-align: left;">
     Language : Java 17 <br>
     FrameWork : Spring Boot 3.1 <br>
-    DataBase : MySQL 8.0 <br>
+    DataBase : H2 (dev), MySQL 8.0 <br>
     APIDocument : Swagger, Spring Rest Docs 
     </div>
     <div style="text-align: left;">
@@ -28,6 +29,7 @@
       도메인의 계층별 테스트 코드를 작성하여 코드의 신뢰성을 높이기 위해 노력했어요. <br>
       분담하는 역할에 대한 책임을 잘게 쪼개지는 않아도 필요한 요소들끼리 맡게끔 작성했어요. <br>
       데이터 조작, 조회 시 불필요한 데이터를 받아오지 않도록 요청과 응답 데이터 생성에 신경썼어요. <br>
+      테스트 코드를 작성해야 문서를 확인할 수 있도록 RestDocs로 Api에 대한 명세를 생성하게 했어요.
           </div> 
     </div>
     <br>
