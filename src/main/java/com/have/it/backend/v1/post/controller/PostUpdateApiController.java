@@ -19,7 +19,7 @@ public class PostUpdateApiController {
 
     private final PostUpdateUseCase postUpdateUseCase;
 
-    @PatchMapping("/api/v1/post/update/{postId}")
+    @PatchMapping(path = "/api/v1/post/update/{postId}")
     public ResponseEntity<BaseResponse<Void>> updatePost(@PathVariable("postId") Long postId, @Valid @RequestBody PostUpdateRequest request) {
 
         postUpdateUseCase.update(postId, request.title(), request.content());

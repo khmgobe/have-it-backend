@@ -15,7 +15,7 @@ public class PostDeleteApiController {
 
     private final PostDeleteUseCase postDeleteUseCase;
 
-    @DeleteMapping("/api/v1/post/delete/{postId}")
+    @DeleteMapping(path = "/api/v1/post/delete/{postId}")
     public ResponseEntity<BaseResponse<Long>> delete(@PathVariable("postId") Long postId) {
 
         postDeleteUseCase.deleteById(postId);

@@ -18,7 +18,7 @@ public class MemberUpdateApiController {
 
     private final MemberUpdateUseCase memberUpdateUseCase;
 
-    @PatchMapping("api/v1/member/update/{memberId}")
+    @PatchMapping(path = "api/v1/member/update/{memberId}")
     public ResponseEntity<BaseResponse<Long>> updateMember (@PathVariable Long memberId, @Valid @RequestBody MemberUpdateRequest memberUpdateRequest){
 
         memberUpdateUseCase.updateMember(memberId, memberUpdateRequest.toServiceRequest());

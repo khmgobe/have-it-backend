@@ -18,7 +18,7 @@ public class MemberReadApiController {
 
     private final MemberReadUseCase memberReadUseCase;
 
-    @GetMapping("/api/v1/member/read/{memberId}")
+    @GetMapping(path = "/api/v1/member/read/{memberId}")
     public ResponseEntity<BaseResponse<MemberReadResponse>> findMemberById(@PathVariable Long memberId) {
 
         MemberReadResponse memberReadResponse = memberReadUseCase.findMemberById(memberId);
@@ -28,7 +28,7 @@ public class MemberReadApiController {
                 .body(BaseResponse.success(memberReadResponse));
     }
 
-    @GetMapping("/api/v1/member/read")
+    @GetMapping(path = "/api/v1/member/read")
     public ResponseEntity<BaseResponse<List<MemberReadResponse>>> findAllMember() {
 
         List<MemberReadResponse> memberReadResponseList = memberReadUseCase.findAllMember();

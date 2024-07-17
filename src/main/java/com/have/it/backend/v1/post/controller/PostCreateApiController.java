@@ -17,7 +17,7 @@ public class PostCreateApiController {
 
     private final PostCreateUseCase postCreateUseCase;
 
-    @PostMapping("/api/v1/post/register")
+    @PostMapping(path = "/api/v1/post/register")
     public ResponseEntity<BaseResponse<Void>> write(@Valid @RequestBody PostCreateRequest request) {
 
         postCreateUseCase.registerPost(request.memberId(), request.title(), request.content());

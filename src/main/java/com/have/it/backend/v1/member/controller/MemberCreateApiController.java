@@ -17,7 +17,7 @@ public class MemberCreateApiController {
 
     private final MemberCreateUseCase memberCreateUseCase;
 
-    @PostMapping("/api/v1/member/register")
+    @PostMapping(path = "/api/v1/member/register")
     public ResponseEntity<BaseResponse<Void>> createMember(@Valid @RequestBody MemberCreateRequest request) {
 
         memberCreateUseCase.registerMember(request.toServiceRequest());

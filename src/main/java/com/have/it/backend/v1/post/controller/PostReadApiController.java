@@ -18,7 +18,7 @@ public class PostReadApiController {
 
     private final PostReadUseCase postReadUseCase;
 
-    @GetMapping("/api/v1/post/read/{postId}")
+    @GetMapping(path = "/api/v1/post/read/{postId}")
     public ResponseEntity<BaseResponse<PostReadResponse>> readPost(@PathVariable("postId") Long postId) {
 
         return ResponseEntity

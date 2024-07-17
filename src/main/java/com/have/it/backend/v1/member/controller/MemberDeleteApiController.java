@@ -16,7 +16,7 @@ public class MemberDeleteApiController {
     private final MemberDeleteUseCase memberDeleteUseCase;
 
 
-    @DeleteMapping("/api/v1/member/delete/{memberId}")
+    @DeleteMapping(path = "/api/v1/member/delete/{memberId}")
     public ResponseEntity<BaseResponse<Long>> deleteMember (@PathVariable Long memberId) {
 
         memberDeleteUseCase.deleteMember(memberId);
