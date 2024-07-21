@@ -42,4 +42,13 @@ class MemberTest {
                 .isInstanceOf(BaseException.class)
                 .hasMessage(ExceptionInformation.NICKNAME_ILLEGAL_LENGTH.getMessage());
     }
+
+    @Test
+    void 멤버_이메일을_등록할_때_정해진_길이를_초과했을_시_예외를_발생시켜야_한다() {
+
+        assertThatThrownBy(() -> Member.fromCreate("khmgobe@testnicknamelength.gocompany.com", "test_nickname", "test_password"))
+                .isInstanceOf(BaseException.class)
+                .hasMessage(ExceptionInformation.EMAIL_ILLEGAL_LENGTH.getMessage());
+
+    }
 }

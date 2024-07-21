@@ -17,6 +17,7 @@ import java.util.Objects;
 public class Member extends BaseTimeEntity {
 
     private static final int MAX_NICKNAME_LENGTH = 15;
+    private static final int MAX_EMAIL_LENGTH = 30;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +42,10 @@ public class Member extends BaseTimeEntity {
     }
 
     public static Member fromCreate(String email, String nickname, String password) {
+
+
+        validateEmail(email);
+
         return Member
                 .builder()
                 .email(email)
@@ -57,6 +62,12 @@ public class Member extends BaseTimeEntity {
     private void validateNickname(final String nickname) {
         if(Objects.isNull(nickname) || nickname.length() > MAX_NICKNAME_LENGTH) {
             throw new BaseException(ExceptionInformation.NICKNAME_ILLEGAL_LENGTH);
+        }
+    }
+
+    private static void validateEmail(final String email) {
+        if(Objects.isNull(email) || email.length() > MAX_EMAIL_LENGTH) {
+            throw  new BaseException(ExceptionInformation.EMAIL_ILLEGAL_LENGTH);
         }
     }
 }
