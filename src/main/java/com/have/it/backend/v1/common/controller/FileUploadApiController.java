@@ -2,6 +2,7 @@ package com.have.it.backend.v1.common.controller;
 
 import com.have.it.backend.v1.common.service.FileUploadService;
 import com.have.it.backend.v1.common.util.BaseResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "FILE-UPLOAD", description = "파일 업로드 관련 API ")
 public class FileUploadApiController {
 
     private final FileUploadService service;

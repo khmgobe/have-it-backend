@@ -3,6 +3,7 @@ package com.have.it.backend.v1.post.controller;
 import com.have.it.backend.v1.common.util.BaseResponse;
 import com.have.it.backend.v1.post.dto.request.PostUpdateRequest;
 import com.have.it.backend.v1.post.service.usecase.PostUpdateUseCase;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "POST-UPDATE", description = "게시 수정 관련 API ")
 public class PostUpdateApiController {
 
 

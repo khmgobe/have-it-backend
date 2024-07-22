@@ -3,6 +3,7 @@ package com.have.it.backend.v1.post.controller;
 import com.have.it.backend.v1.common.util.BaseResponse;
 import com.have.it.backend.v1.post.dto.response.PostReadResponse;
 import com.have.it.backend.v1.post.service.usecase.PostReadUseCase;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "POST-READ", description = "게시 조회 관련 API ")
 public class PostReadApiController {
 
     private final PostReadUseCase postReadUseCase;

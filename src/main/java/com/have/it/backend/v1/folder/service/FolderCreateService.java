@@ -16,7 +16,7 @@ public class FolderCreateService implements FolderCreateUseCase {
     private final FolderJpaRepository folderJpaRepository;
 
     @Override
-    public void register(final FolderCreateRequest request) {
+    public void registerFolder(final FolderCreateRequest request) {
 
         if(folderJpaRepository.existsByTitle(request.title())) {
             throw new BaseException(ExceptionInformation.FOLDER_TITLE_DUPLICATED);

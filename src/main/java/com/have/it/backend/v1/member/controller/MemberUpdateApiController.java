@@ -3,6 +3,7 @@ package com.have.it.backend.v1.member.controller;
 import com.have.it.backend.v1.common.util.BaseResponse;
 import com.have.it.backend.v1.member.dto.request.MemberUpdateRequest;
 import com.have.it.backend.v1.member.service.usecase.MemberUpdateUseCase;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "MEMBER-UPDATE", description = "멤버 수정 관련 API ")
 public class MemberUpdateApiController {
 
     private final MemberUpdateUseCase memberUpdateUseCase;

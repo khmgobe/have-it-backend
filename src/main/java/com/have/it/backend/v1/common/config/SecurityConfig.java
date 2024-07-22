@@ -30,7 +30,11 @@ public class SecurityConfig {
                 // request 설정
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(new AntPathRequestMatcher("/api/v1/member/**"),
-                                         new AntPathRequestMatcher("api/v1/post/**"))
+                                new AntPathRequestMatcher("/api/v1/post/**"),
+                                new AntPathRequestMatcher("/swagger-ui/**"),
+                                new AntPathRequestMatcher("/v3/api-docs/**"),
+                                new AntPathRequestMatcher("/swagger-resources/**"),
+                                new AntPathRequestMatcher("/swagger-ui.html"))
                         .permitAll().anyRequest().authenticated());
 
         return http.build();

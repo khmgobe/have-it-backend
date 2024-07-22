@@ -3,6 +3,7 @@ package com.have.it.backend.v1.member.controller;
 import com.have.it.backend.v1.common.util.BaseResponse;
 import com.have.it.backend.v1.member.dto.response.MemberReadResponse;
 import com.have.it.backend.v1.member.service.usecase.MemberReadUseCase;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "MEMBER-READ", description = "멤버 조회 관련 API ")
 public class MemberReadApiController {
 
     private final MemberReadUseCase memberReadUseCase;
