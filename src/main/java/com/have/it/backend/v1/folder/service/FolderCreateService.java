@@ -6,10 +6,12 @@ import com.have.it.backend.v1.folder.domain.enumeration.Folder;
 import com.have.it.backend.v1.folder.dto.request.FolderCreateRequest;
 import com.have.it.backend.v1.folder.repository.FolderJpaRepository;
 import com.have.it.backend.v1.folder.service.usecase.FolderCreateUseCase;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class FolderCreateService implements FolderCreateUseCase {
 

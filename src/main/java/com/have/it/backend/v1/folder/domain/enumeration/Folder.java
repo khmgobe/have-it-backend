@@ -34,4 +34,10 @@ public class Folder extends BaseTimeEntity {
         this.description = description;
         this.folderPermission = folderPermission;
     }
+
+    public void updateFolder(String title, String description, FolderPermission folderPermission) {
+            this.title = title;
+        this.description = description;
+        this.folderPermission = folderPermission;
+    }
 }
