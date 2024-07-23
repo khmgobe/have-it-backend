@@ -2,18 +2,15 @@ package com.have.it.backend.docs;
 
 import com.epages.restdocs.apispec.Schema;
 import com.have.it.backend.util.RestDocsTestSupport;
-import com.have.it.backend.v1.member.dto.response.MemberReadResponse;
 import com.have.it.backend.v1.post.dto.response.PostReadResponse;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.ResultActions;
-
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.List;
-
 import static com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper.document;
 import static com.epages.restdocs.apispec.ResourceDocumentation.resource;
 import static com.epages.restdocs.apispec.ResourceSnippetParameters.builder;
@@ -37,6 +34,9 @@ class PostReadApiControllerDocsTest extends RestDocsTestSupport {
                 .memberId(1L)
                 .title("test_title")
                 .content("test_content")
+                .memberNickname("test_nickname")
+                .createdAt(LocalDateTime.now())
+                .modifiedAt(LocalDateTime.now())
                 .build();
 
         given(postReadUseCase.findPostById(anyLong())).willReturn(response);
@@ -60,7 +60,10 @@ class PostReadApiControllerDocsTest extends RestDocsTestSupport {
                                                 fieldWithPath("data.id").type(JsonFieldType.NUMBER).description("게시글 아이디"),
                                                 fieldWithPath("data.memberId").type(JsonFieldType.NUMBER).description("멤버 아이디"),
                                                 fieldWithPath("data.title").type(JsonFieldType.STRING).description("게시글 제목"),
-                                                fieldWithPath("data.content").type(JsonFieldType.STRING).description("게시글 내용")
+                                                fieldWithPath("data.content").type(JsonFieldType.STRING).description("게시글 내용"),
+                                                fieldWithPath("data.memberNickname").type(JsonFieldType.STRING).description("멤버 닉네임"),
+                                                fieldWithPath("data.createdAt").type(JsonFieldType.STRING).description("생성 일시"),
+                                                fieldWithPath("data.modifiedAt").type(JsonFieldType.STRING).description("수정 일시")
                                         )
                                         .responseSchema(Schema.schema("PostReadResponse"))
                                         .build()
@@ -85,6 +88,9 @@ class PostReadApiControllerDocsTest extends RestDocsTestSupport {
                         .memberId(1L)
                         .title("test_title")
                         .content("test_content")
+                        .memberNickname("test_nickname")
+                        .createdAt(LocalDateTime.now())
+                        .modifiedAt(LocalDateTime.now())
                         .build(),
 
                 PostReadResponse.builder()
@@ -92,6 +98,9 @@ class PostReadApiControllerDocsTest extends RestDocsTestSupport {
                         .memberId(2L)
                         .title("test_title2")
                         .content("test_content2")
+                        .memberNickname("test_nickname")
+                        .createdAt(LocalDateTime.now())
+                        .modifiedAt(LocalDateTime.now())
                         .build());
 
 
@@ -104,7 +113,7 @@ class PostReadApiControllerDocsTest extends RestDocsTestSupport {
                 .content(objectMapper.writeValueAsString(response))
                 .contentType(MediaType.APPLICATION_JSON));
 
-            actions.andDo(document("post-readAll",
+        actions.andDo(document("post-readAll",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         resource(
@@ -118,10 +127,16 @@ class PostReadApiControllerDocsTest extends RestDocsTestSupport {
                                                 fieldWithPath("data[0].memberId").type(JsonFieldType.NUMBER).description("멤버 아이디"),
                                                 fieldWithPath("data[0].title").type(JsonFieldType.STRING).description("게시글 제목"),
                                                 fieldWithPath("data[0].content").type(JsonFieldType.STRING).description("게시글 내용"),
+                                                fieldWithPath("data[0].memberNickname").type(JsonFieldType.STRING).description("멤버 닉네임"),
+                                                fieldWithPath("data[0].createdAt").type(JsonFieldType.STRING).description("생성 일시"),
+                                                fieldWithPath("data[0].modifiedAt").type(JsonFieldType.STRING).description("수정 일시"),
                                                 fieldWithPath("data[1].id").type(JsonFieldType.NUMBER).description("게시글 아이디"),
                                                 fieldWithPath("data[1].memberId").type(JsonFieldType.NUMBER).description("멤버 아이디"),
                                                 fieldWithPath("data[1].title").type(JsonFieldType.STRING).description("게시글 제목"),
-                                                fieldWithPath("data[1].content").type(JsonFieldType.STRING).description("게시글 내용")
+                                                fieldWithPath("data[1].content").type(JsonFieldType.STRING).description("게시글 내용"),
+                                                fieldWithPath("data[1].memberNickname").type(JsonFieldType.STRING).description("멤버 닉네임"),
+                                                fieldWithPath("data[1].createdAt").type(JsonFieldType.STRING).description("생성 일시"),
+                                                fieldWithPath("data[1].modifiedAt").type(JsonFieldType.STRING).description("수정 일시")
                                         )
                                         .responseSchema(Schema.schema("PostReadResponse"))
                                         .build()

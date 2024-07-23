@@ -22,15 +22,15 @@ public class PostReadService implements PostReadUseCase {
         final Post post = repository
                 .findById(id).orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
 
-        return PostReadResponse.from(post);
+        return PostReadResponse.toResponse(post);
     }
 
     @Override
     public List<PostReadResponse> findAll() {
         return repository
-                .findAll()
+                .findAllWithWriter()
                 .stream()
-                .map(PostReadResponse::from)
+                .map(PostReadResponse::toResponse)
                 .toList();
     }
 }
