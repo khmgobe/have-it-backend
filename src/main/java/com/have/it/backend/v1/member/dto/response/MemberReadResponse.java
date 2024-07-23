@@ -10,7 +10,7 @@ public record MemberReadResponse (
                     String email)
 {
 
-    public static MemberReadResponse fromModel(Member member) {
+    public static MemberReadResponse toResponse(Member member) {
         return MemberReadResponse
                 .builder()
                 .id(member.getId())

@@ -23,7 +23,7 @@ public class FolderReadApiController {
 
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(BaseResponse.success(folderReadUseCase.findFolder(folderId)));
+                .body(BaseResponse.success(folderReadUseCase.findFolderById(folderId)));
     }
 
     @GetMapping("/api/v1/folder/read")

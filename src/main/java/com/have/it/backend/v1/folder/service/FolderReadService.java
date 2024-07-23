@@ -20,7 +20,7 @@ public class FolderReadService implements FolderReadUseCase {
     private final FolderJpaRepository repository;
 
     @Override
-    public FolderReadResponse findFolder(final Long folderId) {
+    public FolderReadResponse findFolderById(final Long folderId) {
 
         final Folder folder = repository
                 .findById(folderId)

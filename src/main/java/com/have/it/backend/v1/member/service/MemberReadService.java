@@ -25,7 +25,7 @@ public class MemberReadService implements MemberReadUseCase {
                 .findById(memberId)
                 .orElseThrow(() -> new BaseException(ID_NO_CONTENT));
 
-        return MemberReadResponse.fromModel(member);
+        return MemberReadResponse.toResponse(member);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class MemberReadService implements MemberReadUseCase {
         return repository
                 .findAll()
                 .stream()
-                .map(MemberReadResponse::fromModel)
+                .map(MemberReadResponse::toResponse)
                 .toList();
     }
 }

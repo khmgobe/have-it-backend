@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface FolderReadUseCase {
 
-    FolderReadResponse findFolder(Long folderId);
+    FolderReadResponse findFolderById(Long folderId);
 
     List<FolderReadResponse> findAllFolder();
 }
