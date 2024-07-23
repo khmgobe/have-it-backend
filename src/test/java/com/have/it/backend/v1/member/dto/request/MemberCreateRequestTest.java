@@ -2,6 +2,7 @@ package com.have.it.backend.v1.member.dto.request;
 
 
 import com.have.it.backend.v1.member.domain.Member;
+import com.have.it.backend.v1.member.domain.enumeration.Role;
 import com.have.it.backend.v1.member.dto.request.MemberCreateRequest;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,17 +16,19 @@ class MemberCreateRequestTest {
         MemberCreateRequest request =
                 MemberCreateRequest
                         .builder()
-                        .email("test_email@naver.com")
+                        .email("king@naver.com")
                         .nickname("test_nickname")
                         .password("test_password")
+                        .role(Role.MEMBER)
                         .build();
 
         // when
-        Member member = Member.fromCreate(request.email(), request.nickname(), request.password());
+        Member member = Member.fromCreate(request.email(), request.nickname(),
+                                          request.password(), request.role());
 
         // then
         assertThat(member)
-                .extracting("email", "nickname", "password")
-                .containsExactly(request.email(), request.nickname(), request.password());
+                .extracting("email", "nickname", "password","role")
+                .containsExactly(request.email(), request.nickname(), request.password(), request.role());
     }
 }

@@ -1,6 +1,7 @@
 package com.have.it.backend.v1.member.controller;
 
 import com.have.it.backend.util.ApiControllerTestSupport;
+import com.have.it.backend.v1.member.domain.enumeration.Role;
 import com.have.it.backend.v1.member.dto.request.MemberCreateRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -30,6 +31,7 @@ class MemberCreateApiControllerTest extends ApiControllerTestSupport {
                         .email("test@gmail.com")
                         .nickname("testNickname")
                         .password("testPassword")
+                        .role(Role.MEMBER)
                         .build();
 
         willDoNothing().given(memberCreateUseCase).registerMember(any());
@@ -58,6 +60,7 @@ class MemberCreateApiControllerTest extends ApiControllerTestSupport {
                         .email(null)
                         .nickname(null)
                         .password(null)
+                        .role(null)
                         .build();
 
         willDoNothing().given(memberCreateUseCase).registerMember(any());

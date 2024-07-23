@@ -31,6 +31,7 @@ class MemberUpdateApiControllerTest extends ApiControllerTestSupport {
                 MemberUpdateRequest
                         .builder()
                         .nickname("test_member_nickname")
+                        .password("test_member_password")
                         .build();
 
         willDoNothing().given(memberUpdateUseCase).updateMember(anyLong(), any());
@@ -59,6 +60,7 @@ class MemberUpdateApiControllerTest extends ApiControllerTestSupport {
                 MemberUpdateRequest
                         .builder()
                         .nickname(null)
+                        .password(null)
                         .build();
 
         willDoNothing().given(memberUpdateUseCase).updateMember(anyLong(), any());
@@ -109,5 +111,4 @@ class MemberUpdateApiControllerTest extends ApiControllerTestSupport {
         actions.andExpect(status().isBadRequest());
         verify(memberUpdateUseCase, times(0)).updateMember(anyLong(), any());
     }
-
 }

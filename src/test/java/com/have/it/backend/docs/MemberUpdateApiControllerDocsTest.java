@@ -34,6 +34,7 @@ class MemberUpdateApiControllerDocsTest extends RestDocsTestSupport {
                 MemberUpdateRequest
                         .builder()
                         .nickname("test_member_nickname")
+                        .password("test_member_password")
                         .build();
 
         willDoNothing().given(memberUpdateUseCase).updateMember(anyLong(), any());
@@ -53,7 +54,8 @@ class MemberUpdateApiControllerDocsTest extends RestDocsTestSupport {
                                         .tag("멤버")
                                         .description("멤버 수정")
                                         .requestFields(
-                                                fieldWithPath("nickname").type(JsonFieldType.STRING).description("멤버 닉네임")
+                                                fieldWithPath("nickname").type(JsonFieldType.STRING).description("멤버 닉네임"),
+                                                fieldWithPath("password").type(JsonFieldType.STRING).description("멤버 비밀번호")
                                         )
                                         .responseFields(
                                                 fieldWithPath("status").type(JsonFieldType.NUMBER).description("HTTP 응답 코드"),

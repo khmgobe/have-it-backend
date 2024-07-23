@@ -2,6 +2,7 @@ package com.have.it.backend.docs;
 
 import com.epages.restdocs.apispec.Schema;
 import com.have.it.backend.util.RestDocsTestSupport;
+import com.have.it.backend.v1.member.domain.enumeration.Role;
 import com.have.it.backend.v1.member.dto.request.MemberCreateRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
@@ -32,6 +33,7 @@ class MemberCreateApiControllerDocsTest extends RestDocsTestSupport {
                         .email("test_email")
                         .nickname("test_nickname")
                         .password("test_password")
+                        .role(Role.MEMBER)
                         .build();
 
         willDoNothing().given(memberCreateUseCase).registerMember(any());
@@ -53,7 +55,8 @@ class MemberCreateApiControllerDocsTest extends RestDocsTestSupport {
                                         .requestFields(
                                                 fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
                                                 fieldWithPath("nickname").type(JsonFieldType.STRING).description("닉네임"),
-                                                fieldWithPath("password").type(JsonFieldType.STRING).description("비밀번호")
+                                                fieldWithPath("password").type(JsonFieldType.STRING).description("비밀번호"),
+                                                fieldWithPath("role").type(JsonFieldType.STRING).description("권한")
                                         )
                                         .responseFields(
                                                 fieldWithPath("status").type(JsonFieldType.NUMBER).description("HTTP 응답 코드"),

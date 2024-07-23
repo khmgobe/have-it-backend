@@ -16,7 +16,6 @@ class MemberReadResponseTest {
         // given
         Member member = Member
                 .builder()
-                .id(1L)
                 .nickname("test_nickname")
                 .email("test_email@naver.com")
                 .build();
