@@ -1,8 +1,11 @@
 package com.have.it.backend.v1.post.service;
 
-import com.have.it.backend.v1.member.dto.response.MemberReadResponse;
-import com.have.it.backend.v1.member.service.usecase.MemberReadUseCase;
+import com.have.it.backend.v1.common.util.BaseException;
+import com.have.it.backend.v1.common.util.enumeration.ExceptionInformation;
+import com.have.it.backend.v1.member.domain.Member;
+import com.have.it.backend.v1.member.repository.MemberJpaRepository;
 import com.have.it.backend.v1.post.domain.Post;
+import com.have.it.backend.v1.post.dto.request.PostCreateRequest;
 import com.have.it.backend.v1.post.repository.PostJpaRepository;
 import com.have.it.backend.v1.post.service.usecase.PostCreateUseCase;
 import lombok.RequiredArgsConstructor;
@@ -14,16 +17,18 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class PostCreateService implements PostCreateUseCase {
 
-    private final MemberReadUseCase memberReadUseCase;
-    private final PostJpaRepository repository;
+    private final MemberJpaRepository memberJpaRepository;
+    private final PostJpaRepository postJpaRepository;
 
     @Override
-    public void registerPost(Long memberId, String title, String content) {
+    public void registerPost(final PostCreateRequest request) {
 
-        final MemberReadResponse member = memberReadUseCase.findMemberById(memberId);
+        final Member findMember = memberJpaRepository
+                .findById(request.memberId())
+                .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
 
-        final Post post = Post.of(title, content, member.toModel());
+        final Post post = PostCreateRequest.createPost(findMember, request.title(), request.content());
 
-        repository.save(post);
+        postJpaRepository.save(post);
     }
 }

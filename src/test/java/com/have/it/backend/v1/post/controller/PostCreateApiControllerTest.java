@@ -32,7 +32,7 @@ class PostCreateApiControllerTest extends ApiControllerTestSupport {
                 .content("test_content")
                 .build();
 
-        willDoNothing().given(postCreateUseCase).registerPost(anyLong(), anyString(), anyString());
+        willDoNothing().given(postCreateUseCase).registerPost(any());
 
         // when
         ResultActions actions = mockMvc.perform(post("/api/v1/post/register")
@@ -44,7 +44,7 @@ class PostCreateApiControllerTest extends ApiControllerTestSupport {
 
         //then
         actions.andExpect(status().isCreated());
-        verify(postCreateUseCase, times(1)).registerPost(anyLong(), anyString(), anyString());
+        verify(postCreateUseCase, times(1)).registerPost(any());
     }
 
     @Test
@@ -59,7 +59,7 @@ class PostCreateApiControllerTest extends ApiControllerTestSupport {
                 .content("test_content")
                 .build();
 
-        willDoNothing().given(postCreateUseCase).registerPost(anyLong(), anyString(), anyString());
+        willDoNothing().given(postCreateUseCase).registerPost(any());
 
         // when
         ResultActions actions = mockMvc.perform(post("/api/v1/post/register")
@@ -74,7 +74,7 @@ class PostCreateApiControllerTest extends ApiControllerTestSupport {
 
         //then
         actions.andExpect(status().isBadRequest());
-        verify(postCreateUseCase, times(0)).registerPost(anyLong(), anyString(), anyString());
+        verify(postCreateUseCase, times(0)).registerPost(any());
     }
 
     @Test
@@ -89,7 +89,7 @@ class PostCreateApiControllerTest extends ApiControllerTestSupport {
                 .content(null)
                 .build();
 
-        willDoNothing().given(postCreateUseCase).registerPost(anyLong(), anyString(), anyString());
+        willDoNothing().given(postCreateUseCase).registerPost(any());
 
         // when
         ResultActions actions = mockMvc.perform(post("/api/v1/post/register")
@@ -106,6 +106,6 @@ class PostCreateApiControllerTest extends ApiControllerTestSupport {
 
         //then
         actions.andExpect(status().isBadRequest());
-        verify(postCreateUseCase, times(0)).registerPost(anyLong(), anyString(), anyString());
+        verify(postCreateUseCase, times(0)).registerPost(any());
     }
 }

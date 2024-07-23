@@ -13,7 +13,6 @@ import static com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper.docume
 import static com.epages.restdocs.apispec.ResourceDocumentation.resource;
 import static com.epages.restdocs.apispec.ResourceSnippetParameters.builder;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.willDoNothing;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
@@ -35,7 +34,7 @@ class PostCreateApiControllerDocsTest extends RestDocsTestSupport {
                 .content("test_content")
                 .build();
 
-        willDoNothing().given(postCreateUseCase).registerPost(anyLong(), anyString(), anyString());
+        willDoNothing().given(postCreateUseCase).registerPost(any());
 
         // when
         ResultActions actions = mockMvc.perform(post("/api/v1/post/register")
