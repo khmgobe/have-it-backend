@@ -20,6 +20,7 @@ public class Member extends BaseTimeEntity {
     private static final int MAX_EMAIL_LENGTH = 30;
 
     @Id
+    @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -42,7 +43,6 @@ public class Member extends BaseTimeEntity {
     }
 
     public static Member fromCreate(String email, String nickname, String password) {
-
 
         validateEmail(email);
 
