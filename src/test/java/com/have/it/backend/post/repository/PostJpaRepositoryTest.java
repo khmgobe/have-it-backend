@@ -1,10 +1,12 @@
-package com.have.it.backend.v1.post.repository;
+package com.have.it.backend.post.repository;
 
 import com.have.it.backend.v1.common.util.BaseException;
 import com.have.it.backend.v1.common.util.enumeration.ExceptionInformation;
 import com.have.it.backend.v1.member.domain.Member;
+import com.have.it.backend.v1.member.domain.enumeration.Role;
 import com.have.it.backend.v1.member.repository.MemberJpaRepository;
 import com.have.it.backend.v1.post.domain.Post;
+import com.have.it.backend.v1.post.repository.PostJpaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -33,8 +35,8 @@ class PostJpaRepositoryTest {
         memberJpaRepository.deleteAllInBatch();
     }
 
-    private Member createAndSaveMember(final String email, final String nickname, final String password) {
-        Member member = Member.fromCreate(email, nickname, password);
+    private Member createAndSaveMember(final String email, final String nickname, final String password, final Role role) {
+        Member member = Member.fromCreate(email, nickname, password, role);
         return memberJpaRepository.save(member);
     }
 
@@ -48,9 +50,12 @@ class PostJpaRepositoryTest {
 
     @Test
     void 게시글을_삭제한다() {
+
         // given
-        final Member findMember = createAndSaveMember("test_email@naver.com", "test_nickname", "test_password");
+        final Member findMember = createAndSaveMember("test@naver.com", "test_nickname", "test_password", Role.MEMBER);
+
         final Post post = createPost("test_title", "test_content", findMember);
+
         postJpaRepository.save(post);
 
         // when
@@ -65,12 +70,15 @@ class PostJpaRepositoryTest {
 
     @Test
     void 게시글을_정상적으로_저장할_수_있다() {
+
         // given
-        final Member findMember = createAndSaveMember("test_email@naver.com", "test_nickname", "test_password");
+        final Member findMember = createAndSaveMember("test@naver.com", "test_nickname", "test_password", Role.MEMBER);
+
         final Post post = createPost("test_title", "test_content", findMember);
 
         // when
         final Post savedPost = postJpaRepository.save(post);
+
         final Post findPost = postJpaRepository
                 .findById(savedPost.getId())
                 .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
@@ -83,12 +91,15 @@ class PostJpaRepositoryTest {
 
     @Test
     void 게시글을_작성하고_작성자와_작성자의_아이디를_확인할_수_있어야_한다() {
+
         // given
-        final Member findMember = createAndSaveMember("test_email@naver.com", "test_nickname", "test_password");
+        final Member findMember = createAndSaveMember("test@naver.com", "test_nickname", "test_password", Role.MEMBER);
+
         final Post post = createPost("test_title", "test_content", findMember);
 
         // when
         final Post savedPost = postJpaRepository.save(post);
+
         final Post findPost = postJpaRepository
                 .findByIdWithWriter(savedPost.getId())
                 .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
@@ -105,8 +116,9 @@ class PostJpaRepositoryTest {
 
     @Test
     void 저장한_게시글_목록을_정상적으로_조회할_수_있어야한다() {
+
         // given
-        final Member findMember = createAndSaveMember("test_email@naver.com", "test_nickname", "test_password");
+        final Member findMember = createAndSaveMember("test@naver.com", "test_nickname", "test_password", Role.MEMBER);
 
         final List<Post> postList = List.of(
                 createPost("test_title", "test_content", findMember),
@@ -128,8 +140,8 @@ class PostJpaRepositoryTest {
     @Test
     void 저장한_게시글_목록을_정상적으로_조회할_수_있어야하며_작성자의_닉네임도_함께_확인할_수_있어야_한다() {
         // given
-        final Member findMember = createAndSaveMember("test_email@naver.com", "test_nickname", "test_password");
-        final Member findMember2 = createAndSaveMember("test_email2@naver.com", "test_nickname2", "test_password");
+        final Member findMember = createAndSaveMember("test@naver.com", "test_nickname", "test_password", Role.MEMBER);
+        final Member findMember2 = createAndSaveMember("test@naver.com", "test_nickname2", "test_password", Role.ADMIN);
 
         final List<Post> postList = List.of(
                 createPost("test_title", "test_content", findMember),

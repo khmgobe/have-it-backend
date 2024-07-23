@@ -1,4 +1,4 @@
-package com.have.it.backend.v1.post.controller;
+package com.have.it.backend.post.controller;
 
 import com.have.it.backend.util.ApiControllerTestSupport;
 import com.have.it.backend.v1.post.dto.response.PostReadResponse;

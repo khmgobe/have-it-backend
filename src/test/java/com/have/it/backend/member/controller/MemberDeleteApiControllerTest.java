@@ -1,4 +1,4 @@
-package com.have.it.backend.v1.member.controller;
+package com.have.it.backend.member.controller;
 
 import com.have.it.backend.util.ApiControllerTestSupport;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,9 @@
-package com.have.it.backend.v1.member.repository;
+package com.have.it.backend.member.repository;
 
 import com.have.it.backend.v1.common.util.BaseException;
 import com.have.it.backend.v1.common.util.enumeration.ExceptionInformation;
 import com.have.it.backend.v1.member.domain.Member;
+import com.have.it.backend.v1.member.repository.MemberJpaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
