@@ -26,7 +26,9 @@ public class MemberCreateService implements MemberCreateUseCase {
             throw new BaseException(ExceptionInformation.EMAIL_DUPLICATED);
         }
 
-        final Member member = Member.fromCreate(request.email(), request.nickname(), passwordEncoder.encode(request.password()));
+        final Member member = Member
+                .fromCreate(request.email(), request.nickname(),
+                            passwordEncoder.encode(request.password()), request.role());
 
         repository.save(member);
     }

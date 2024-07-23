@@ -1,13 +1,16 @@
 package com.have.it.backend.v1.member.dto.response;
 
 import com.have.it.backend.v1.member.domain.Member;
+import com.have.it.backend.v1.member.domain.enumeration.Role;
 import lombok.Builder;
 
 @Builder
 public record MemberReadResponse (
                     Long id,
                     String nickname,
-                    String email)
+                    String email,
+                    Role role)
+
 {
 
     public static MemberReadResponse toResponse(Member member) {
@@ -16,15 +19,7 @@ public record MemberReadResponse (
                 .id(member.getId())
                 .email(member.getEmail())
                 .nickname(member.getNickname())
-                .build();
-    }
-
-    public Member toModel() {
-        return Member
-                .builder()
-                .id(id)
-                .email(email)
-                .nickname(nickname)
+                .role(member.getRole())
                 .build();
     }
 }

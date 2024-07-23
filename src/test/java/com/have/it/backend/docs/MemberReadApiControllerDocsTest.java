@@ -2,6 +2,7 @@ package com.have.it.backend.docs;
 
 import com.epages.restdocs.apispec.Schema;
 import com.have.it.backend.util.RestDocsTestSupport;
+import com.have.it.backend.v1.member.domain.enumeration.Role;
 import com.have.it.backend.v1.member.dto.response.MemberReadResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
@@ -9,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.List;
 import static com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper.document;
 import static com.epages.restdocs.apispec.ResourceDocumentation.resource;
@@ -35,6 +35,7 @@ class MemberReadApiControllerDocsTest extends RestDocsTestSupport {
                 .id(memberId)
                 .nickname("test_response_nickname")
                 .email("test_response_email")
+                .role(Role.MEMBER)
                 .build();
 
         given(memberReadUseCase.findMemberById(anyLong())).willReturn(response);
@@ -57,7 +58,8 @@ class MemberReadApiControllerDocsTest extends RestDocsTestSupport {
                                                 fieldWithPath("data").type(JsonFieldType.OBJECT).description("기본 응답 데이터").optional(),
                                                 fieldWithPath("data.id").type(JsonFieldType.NUMBER).description("멤버 아이디"),
                                                 fieldWithPath("data.nickname").type(JsonFieldType.STRING).description("멤버 닉네임"),
-                                                fieldWithPath("data.email").type(JsonFieldType.STRING).description("멤버 이메일")
+                                                fieldWithPath("data.email").type(JsonFieldType.STRING).description("멤버 이메일"),
+                                                fieldWithPath("data.role").type(JsonFieldType.STRING).description("멤버 권한")
                                         )
                                         .responseSchema(Schema.schema("MemberReadResponse"))
                                         .build()
@@ -81,12 +83,14 @@ class MemberReadApiControllerDocsTest extends RestDocsTestSupport {
                         .id(1L)
                         .nickname("test_response_nickname")
                         .email("test_response_email")
+                        .role(Role.MEMBER)
                         .build(),
 
                 MemberReadResponse.builder()
                         .id(2L)
                         .nickname("good_nickname")
                         .email("good_email@naver.com")
+                        .role(Role.MEMBER)
                         .build());
 
 
@@ -111,9 +115,11 @@ class MemberReadApiControllerDocsTest extends RestDocsTestSupport {
                                                 fieldWithPath("data[0].id").type(JsonFieldType.NUMBER).description("멤버 아이디"),
                                                 fieldWithPath("data[0].nickname").type(JsonFieldType.STRING).description("멤버 닉네임"),
                                                 fieldWithPath("data[0].email").type(JsonFieldType.STRING).description("멤버 이메일"),
+                                                fieldWithPath("data[0].role").type(JsonFieldType.STRING).description("멤버 권한"),
                                                 fieldWithPath("data[1].id").type(JsonFieldType.NUMBER).description("멤버 아이디"),
                                                 fieldWithPath("data[1].nickname").type(JsonFieldType.STRING).description("멤버 닉네임"),
-                                                fieldWithPath("data[1].email").type(JsonFieldType.STRING).description("멤버 이메일")
+                                                fieldWithPath("data[1].email").type(JsonFieldType.STRING).description("멤버 이메일"),
+                                                fieldWithPath("data[1].role").type(JsonFieldType.STRING).description("멤버 권한")
                                         )
                                         .responseSchema(Schema.schema("MemberReadResponse"))
                                         .build()
