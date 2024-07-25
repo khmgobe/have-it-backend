@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post extends BaseTimeEntity {
 
-
     @Id
     @Column(columnDefinition = "BIGINT")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +35,8 @@ public class Post extends BaseTimeEntity {
         this.content = content;
         this.writer = writer;
     }
-     public void update(String title, String content) {
+
+    public void update(String title, String content) {
         this.title = title;
         this.content = content;
     }

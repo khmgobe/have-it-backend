@@ -22,8 +22,6 @@ public class PostDeleteApiController {
 
         postDeleteUseCase.deleteById(postId);
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(BaseResponse.success(postId));
+        return ResponseEntity.status(HttpStatus.OK).body(BaseResponse.success(postId));
     }
 }

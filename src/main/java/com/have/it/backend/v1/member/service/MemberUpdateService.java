@@ -15,14 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class MemberUpdateService implements MemberUpdateUseCase {
 
-
     private final MemberJpaRepository repository;
 
     public void updateMember(final Long memberId, final MemberUpdateRequest request) {
 
-        final Member member = repository
-                .findById(memberId)
-                .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
+        final Member member =
+                repository
+                        .findById(memberId)
+                        .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
 
         member.updateNickname(request.nickname());
         member.updatePassword(request.password());

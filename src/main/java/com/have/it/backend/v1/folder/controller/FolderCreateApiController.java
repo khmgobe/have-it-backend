@@ -20,11 +20,10 @@ public class FolderCreateApiController {
     private final FolderCreateUseCase folderCreateUseCase;
 
     @PostMapping(path = "/api/v1/folder/register")
-    public ResponseEntity<BaseResponse<Void>> register(@Valid @RequestBody FolderCreateRequest request) {
-            folderCreateUseCase.registerFolder(request.toServiceRequest());
+    public ResponseEntity<BaseResponse<Void>> register(
+            @Valid @RequestBody FolderCreateRequest request) {
+        folderCreateUseCase.registerFolder(request.toServiceRequest());
 
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(BaseResponse.created());
+        return ResponseEntity.status(HttpStatus.CREATED).body(BaseResponse.created());
     }
 }

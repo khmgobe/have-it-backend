@@ -19,12 +19,12 @@ public class FolderUpdateApiController {
     private final FolderUpdateUseCase folderUpdateUseCase;
 
     @PatchMapping("/api/v1/folder/update/{folderId}")
-    public ResponseEntity<BaseResponse<Void>> updateFolder(@PathVariable("folderId") Long folderId, @Valid @RequestBody FolderUpdateRequest folderUpdateRequest) {
+    public ResponseEntity<BaseResponse<Void>> updateFolder(
+            @PathVariable("folderId") Long folderId,
+            @Valid @RequestBody FolderUpdateRequest folderUpdateRequest) {
 
         folderUpdateUseCase.updateFolder(folderId, folderUpdateRequest.toServiceRequest());
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(BaseResponse.success());
+        return ResponseEntity.status(HttpStatus.OK).body(BaseResponse.success());
     }
 }

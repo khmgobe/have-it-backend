@@ -6,12 +6,11 @@ import com.have.it.backend.v1.common.util.RegexUtil;
 import com.have.it.backend.v1.common.util.enumeration.ExceptionInformation;
 import com.have.it.backend.v1.member.domain.enumeration.Role;
 import jakarta.persistence.*;
+import java.util.Objects;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.Objects;
 
 @Getter
 @Entity
@@ -40,7 +39,6 @@ public class Member extends BaseTimeEntity {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
-
     @Builder
     private Member(String email, String nickname, String password, Role role) {
         this.email = email;
@@ -56,13 +54,7 @@ public class Member extends BaseTimeEntity {
         validatePassword(password);
         validateRole(role);
 
-        return Member
-                .builder()
-                .email(email)
-                .nickname(nickname)
-                .password(password)
-                .role(role)
-                .build();
+        return Member.builder().email(email).nickname(nickname).password(password).role(role).build();
     }
 
     public void updateNickname(final String nickname) {
@@ -107,7 +99,7 @@ public class Member extends BaseTimeEntity {
     }
 
     private static void validateRole(Role role) {
-        if(Objects.isNull(role)) {
+        if (Objects.isNull(role)) {
             throw new BaseException(ExceptionInformation.ROLE_ILLEGAL_NULL);
         }
     }
@@ -117,5 +109,4 @@ public class Member extends BaseTimeEntity {
             throw new BaseException(ExceptionInformation.PASSWORD_ILLEGAL_LENGTH);
         }
     }
-
 }

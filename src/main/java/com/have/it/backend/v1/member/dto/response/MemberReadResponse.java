@@ -5,17 +5,10 @@ import com.have.it.backend.v1.member.domain.enumeration.Role;
 import lombok.Builder;
 
 @Builder
-public record MemberReadResponse (
-                    Long id,
-                    String nickname,
-                    String email,
-                    Role role)
-
-{
+public record MemberReadResponse(Long id, String nickname, String email, Role role) {
 
     public static MemberReadResponse toResponse(Member member) {
-        return MemberReadResponse
-                .builder()
+        return MemberReadResponse.builder()
                 .id(member.getId())
                 .email(member.getEmail())
                 .nickname(member.getNickname())

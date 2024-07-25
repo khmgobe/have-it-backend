@@ -17,11 +17,12 @@ public class PostUpdateService implements PostUpdateUseCase {
     private final PostJpaRepository repository;
 
     @Override
-    public void update (final Long postId, final String title, final String content) {
+    public void update(final Long postId, final String title, final String content) {
 
-        final Post post = repository
-                .findById(postId)
-                .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
+        final Post post =
+                repository
+                        .findById(postId)
+                        .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
 
         post.update(title, content);
     }

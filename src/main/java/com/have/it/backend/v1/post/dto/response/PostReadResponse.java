@@ -1,10 +1,9 @@
 package com.have.it.backend.v1.post.dto.response;
 
 import com.have.it.backend.v1.post.domain.Post;
+import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
-
-import java.time.LocalDateTime;
 
 @Getter
 public class PostReadResponse {
@@ -18,7 +17,14 @@ public class PostReadResponse {
     private final LocalDateTime modifiedAt;
 
     @Builder
-    private PostReadResponse(Long id, Long memberId, String memberNickname, String title, String content, LocalDateTime createdAt, LocalDateTime modifiedAt) {
+    private PostReadResponse(
+            Long id,
+            Long memberId,
+            String memberNickname,
+            String title,
+            String content,
+            LocalDateTime createdAt,
+            LocalDateTime modifiedAt) {
         this.id = id;
         this.memberId = memberId;
         this.memberNickname = memberNickname;
@@ -30,8 +36,7 @@ public class PostReadResponse {
 
     public static PostReadResponse toResponse(Post post) {
 
-        return PostReadResponse
-                .builder()
+        return PostReadResponse.builder()
                 .id(post.getId())
                 .memberId(post.getWriter().getId())
                 .memberNickname(post.getWriter().getNickname())

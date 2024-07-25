@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum ExceptionInformation {
 
-
     /* 204: NO_CONTENT */
     ID_NO_CONTENT("아이디가 존재하지 않습니다", HttpStatus.NOT_FOUND.value()),
 

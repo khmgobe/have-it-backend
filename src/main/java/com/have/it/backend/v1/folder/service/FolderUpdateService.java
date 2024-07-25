@@ -20,9 +20,10 @@ public class FolderUpdateService implements FolderUpdateUseCase {
     @Override
     public void updateFolder(final Long folderId, final FolderUpdateRequest request) {
 
-        final Folder findFolder = folderJpaRepository
-                .findById(folderId)
-                .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
+        final Folder findFolder =
+                folderJpaRepository
+                        .findById(folderId)
+                        .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
 
         findFolder.updateFolder(request.title(), request.description(), request.folderPermission());
     }

@@ -20,11 +20,13 @@ public class FolderCreateService implements FolderCreateUseCase {
     @Override
     public void registerFolder(final FolderCreateRequest request) {
 
-        if(folderJpaRepository.existsByTitle(request.title())) {
+        if (folderJpaRepository.existsByTitle(request.title())) {
             throw new BaseException(ExceptionInformation.FOLDER_TITLE_DUPLICATED);
         }
 
-        final Folder folder = FolderCreateRequest.fromCreate(request.title(), request.description(), request.folderPermission());
+        final Folder folder =
+                FolderCreateRequest.fromCreate(
+                        request.title(), request.description(), request.folderPermission());
 
         folderJpaRepository.save(folder);
     }

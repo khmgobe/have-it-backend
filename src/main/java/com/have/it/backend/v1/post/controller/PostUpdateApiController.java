@@ -18,17 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "POST-UPDATE", description = "게시 수정 관련 API ")
 public class PostUpdateApiController {
 
-
     private final PostUpdateUseCase postUpdateUseCase;
 
     @PatchMapping(path = "/api/v1/post/update/{postId}")
-    public ResponseEntity<BaseResponse<Void>> updatePost(@PathVariable("postId") Long postId, @Valid @RequestBody PostUpdateRequest request) {
+    public ResponseEntity<BaseResponse<Void>> updatePost(
+            @PathVariable("postId") Long postId, @Valid @RequestBody PostUpdateRequest request) {
 
         postUpdateUseCase.update(postId, request.title(), request.content());
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(BaseResponse.success());
-
+        return ResponseEntity.status(HttpStatus.OK).body(BaseResponse.success());
     }
 }

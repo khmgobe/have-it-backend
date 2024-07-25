@@ -13,19 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "MEMBER-DELETE", description = "멤버 삭제 관련 API ")
-
 public class MemberDeleteApiController {
 
     private final MemberDeleteUseCase memberDeleteUseCase;
 
-
     @DeleteMapping(path = "/api/v1/member/delete/{memberId}")
-    public ResponseEntity<BaseResponse<Long>> deleteMember (@PathVariable Long memberId) {
+    public ResponseEntity<BaseResponse<Long>> deleteMember(@PathVariable Long memberId) {
 
         memberDeleteUseCase.deleteMember(memberId);
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(BaseResponse.success(memberId));
+        return ResponseEntity.status(HttpStatus.OK).body(BaseResponse.success(memberId));
     }
 }

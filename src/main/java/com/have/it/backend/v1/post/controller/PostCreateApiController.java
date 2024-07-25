@@ -24,8 +24,6 @@ public class PostCreateApiController {
 
         postCreateUseCase.registerPost(request.toServiceRequest());
 
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(BaseResponse.created());
+        return ResponseEntity.status(HttpStatus.CREATED).body(BaseResponse.created());
     }
 }

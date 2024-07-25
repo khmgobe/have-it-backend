@@ -20,14 +20,11 @@ public class MemberCreateApiController {
     private final MemberCreateUseCase memberCreateUseCase;
 
     @PostMapping(path = "/api/v1/member/register")
-    public ResponseEntity<BaseResponse<Void>> createMember(@Valid @RequestBody MemberCreateRequest request) {
+    public ResponseEntity<BaseResponse<Void>> createMember(
+            @Valid @RequestBody MemberCreateRequest request) {
 
         memberCreateUseCase.registerMember(request.toServiceRequest());
 
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(BaseResponse.created());
+        return ResponseEntity.status(HttpStatus.CREATED).body(BaseResponse.created());
     }
-
-
 }

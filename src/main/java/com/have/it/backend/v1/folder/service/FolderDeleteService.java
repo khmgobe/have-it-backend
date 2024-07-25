@@ -22,5 +22,4 @@ public class FolderDeleteService implements FolderDeleteUseCase {
 
         folderJpaRepository.deleteById(folderId);
     }
-
 }

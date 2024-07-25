@@ -6,11 +6,10 @@ import com.have.it.backend.v1.folder.domain.enumeration.Folder;
 import com.have.it.backend.v1.folder.dto.response.FolderReadResponse;
 import com.have.it.backend.v1.folder.repository.FolderJpaRepository;
 import com.have.it.backend.v1.folder.service.usecase.FolderReadUseCase;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -22,9 +21,10 @@ public class FolderReadService implements FolderReadUseCase {
     @Override
     public FolderReadResponse findFolderById(final Long folderId) {
 
-        final Folder folder = repository
-                .findById(folderId)
-                .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
+        final Folder folder =
+                repository
+                        .findById(folderId)
+                        .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
 
         return FolderReadResponse.toResponse(folder);
     }
@@ -32,10 +32,6 @@ public class FolderReadService implements FolderReadUseCase {
     @Override
     public List<FolderReadResponse> findAllFolder() {
 
-        return repository
-                .findAll()
-                .stream()
-                .map(FolderReadResponse::toResponse)
-                .toList();
+        return repository.findAll().stream().map(FolderReadResponse::toResponse).toList();
     }
 }

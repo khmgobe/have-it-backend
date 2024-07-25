@@ -21,8 +21,6 @@ public class FolderDeleteApiController {
     public ResponseEntity<BaseResponse<Long>> deleteFolder(@PathVariable("folderId") Long folderId) {
         folderDeleteUseCase.deleteFolder(folderId);
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(BaseResponse.success(folderId));
+        return ResponseEntity.status(HttpStatus.OK).body(BaseResponse.success(folderId));
     }
 }

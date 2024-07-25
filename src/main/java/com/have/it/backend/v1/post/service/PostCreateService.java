@@ -23,9 +23,10 @@ public class PostCreateService implements PostCreateUseCase {
     @Override
     public void registerPost(final PostCreateRequest request) {
 
-        final Member findMember = memberJpaRepository
-                .findById(request.memberId())
-                .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
+        final Member findMember =
+                memberJpaRepository
+                        .findById(request.memberId())
+                        .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
 
         final Post post = PostCreateRequest.createPost(findMember, request.title(), request.content());
 

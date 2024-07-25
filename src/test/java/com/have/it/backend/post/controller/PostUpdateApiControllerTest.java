@@ -1,12 +1,5 @@
 package com.have.it.backend.post.controller;
 
-import com.have.it.backend.util.ApiControllerTestSupport;
-import com.have.it.backend.v1.post.dto.request.PostUpdateRequest;
-import org.junit.jupiter.api.Test;
-import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.ResultActions;
-import java.nio.charset.StandardCharsets;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.willDoNothing;
 import static org.mockito.Mockito.times;
@@ -17,8 +10,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class PostUpdateApiControllerTest extends ApiControllerTestSupport {
+import com.have.it.backend.util.ApiControllerTestSupport;
+import com.have.it.backend.v1.post.dto.request.PostUpdateRequest;
+import java.nio.charset.StandardCharsets;
+import org.junit.jupiter.api.Test;
+import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.web.servlet.ResultActions;
 
+class PostUpdateApiControllerTest extends ApiControllerTestSupport {
 
     @Test
     @WithMockUser(value = "MEMBER")
@@ -28,23 +28,22 @@ class PostUpdateApiControllerTest extends ApiControllerTestSupport {
         Long postId = 1L;
 
         PostUpdateRequest request =
-                PostUpdateRequest
-                        .builder()
-                        .title("test_title")
-                        .content("test_content")
-                        .build();
+                PostUpdateRequest.builder().title("test_title").content("test_content").build();
 
         willDoNothing().given(postUpdateUseCase).update(anyLong(), anyString(), anyString());
 
         // when
-        ResultActions actions = mockMvc.perform(patch("/api/v1/post/update/{postId}", postId)
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .characterEncoding(StandardCharsets.UTF_8)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andDo(print());
+        ResultActions actions =
+                mockMvc
+                        .perform(
+                                patch("/api/v1/post/update/{postId}", postId)
+                                        .with(csrf())
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .characterEncoding(StandardCharsets.UTF_8)
+                                        .content(objectMapper.writeValueAsString(request)))
+                        .andDo(print());
 
-        //then
+        // then
         actions.andExpect(status().isOk());
         verify(postUpdateUseCase, times(1)).update(anyLong(), anyString(), anyString());
     }
@@ -56,28 +55,26 @@ class PostUpdateApiControllerTest extends ApiControllerTestSupport {
         // given
         Long postId = 1L;
 
-        PostUpdateRequest request =
-                PostUpdateRequest
-                        .builder()
-                        .title(null)
-                        .content(" ")
-                        .build();
+        PostUpdateRequest request = PostUpdateRequest.builder().title(null).content(" ").build();
 
         willDoNothing().given(memberUpdateUseCase).updateMember(anyLong(), any());
 
         // when
-        ResultActions actions = mockMvc.perform(patch("/api/v1/post/update/{postId}", postId)
-                .with(csrf())
-                .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding(StandardCharsets.UTF_8)
-                .content(objectMapper.writeValueAsString(request)));
+        ResultActions actions =
+                mockMvc.perform(
+                        patch("/api/v1/post/update/{postId}", postId)
+                                .with(csrf())
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .characterEncoding(StandardCharsets.UTF_8)
+                                .content(objectMapper.writeValueAsString(request)));
 
-        actions.andDo(print())
+        actions
+                .andDo(print())
                 .andExpect(jsonPath("$.data").isMap())
                 .andExpect(jsonPath("$.data['title']").value("제목은 비어있을 수 없습니다."))
                 .andExpect(jsonPath("$.data['content']").value("내용은 비어있을 수 없습니다."));
 
-        //then
+        // then
         actions.andExpect(status().isBadRequest());
         verify(postUpdateUseCase, times(0)).update(anyLong(), anyString(), anyString());
     }

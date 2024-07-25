@@ -1,13 +1,14 @@
 package com.have.it.backend.v1.common.config;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityScheme;
-import org.springframework.http.HttpHeaders;
 import java.util.Collections;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
 
 @Configuration
 public class OpenApiConfig {
@@ -21,21 +22,22 @@ public class OpenApiConfig {
 
     @Bean
     public OpenAPI openAPI(@Value("${springdoc.version:}") String appVersion) {
-        io.swagger.v3.oas.models.servers.Server currentServer = new io.swagger.v3.oas.models.servers.Server();
+        io.swagger.v3.oas.models.servers.Server currentServer =
+                new io.swagger.v3.oas.models.servers.Server();
         currentServer.setUrl(SERVER_URL);
         currentServer.setDescription(SERVER_DESCRIPTION);
 
         return new OpenAPI()
-                .components(new Components()
-                        .addSecuritySchemes(SECURITY_SCHEME_NAME, new SecurityScheme()
-                                .type(SecurityScheme.Type.HTTP)
-                                .scheme(SECURITY_SCHEME_TYPE)
-                                .in(SecurityScheme.In.HEADER)
-                                .name(HttpHeaders.AUTHORIZATION)))
+                .components(
+                        new Components()
+                                .addSecuritySchemes(
+                                        SECURITY_SCHEME_NAME,
+                                        new SecurityScheme()
+                                                .type(SecurityScheme.Type.HTTP)
+                                                .scheme(SECURITY_SCHEME_TYPE)
+                                                .in(SecurityScheme.In.HEADER)
+                                                .name(HttpHeaders.AUTHORIZATION)))
                 .servers(Collections.singletonList(currentServer))
-                .info(new Info()
-                        .title(API_TITLE)
-                        .version(appVersion)
-                        .description(API_DESCRIPTION));
+                .info(new Info().title(API_TITLE).version(appVersion).description(API_DESCRIPTION));
     }
 }

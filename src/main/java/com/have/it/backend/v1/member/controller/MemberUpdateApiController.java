@@ -21,12 +21,11 @@ public class MemberUpdateApiController {
     private final MemberUpdateUseCase memberUpdateUseCase;
 
     @PatchMapping(path = "api/v1/member/update/{memberId}")
-    public ResponseEntity<BaseResponse<Long>> updateMember (@PathVariable Long memberId, @Valid @RequestBody MemberUpdateRequest memberUpdateRequest){
+    public ResponseEntity<BaseResponse<Long>> updateMember(
+            @PathVariable Long memberId, @Valid @RequestBody MemberUpdateRequest memberUpdateRequest) {
 
         memberUpdateUseCase.updateMember(memberId, memberUpdateRequest.toServiceRequest());
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(BaseResponse.success(memberId));
+        return ResponseEntity.status(HttpStatus.OK).body(BaseResponse.success(memberId));
     }
 }
