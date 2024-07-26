@@ -20,6 +20,6 @@ public class PostDeleteService implements PostDeleteUseCase {
                 .findById(postId)
                 .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
 
-       repository.deleteById(postId);
+        repository.deleteById(postId);
     }
 }

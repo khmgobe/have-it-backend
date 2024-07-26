@@ -18,10 +18,10 @@ public class MemberDeleteService implements MemberDeleteUseCase {
     @Override
     public void deleteMember(final Long memberId) {
 
-        repository.findById(memberId)
-                  .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
+        repository
+                .findById(memberId)
+                .orElseThrow(() -> new BaseException(ExceptionInformation.ID_NO_CONTENT));
 
         repository.deleteById(memberId);
-
     }
 }

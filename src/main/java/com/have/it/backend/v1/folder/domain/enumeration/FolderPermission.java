@@ -1,14 +1,12 @@
 package com.have.it.backend.v1.folder.domain.enumeration;
 
+import java.util.stream.IntStream;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-
-import java.util.stream.IntStream;
 
 @Getter
 @RequiredArgsConstructor
 public enum FolderPermission {
-
     READ(1),
     WRITE(2),
     MOVE(4);
@@ -24,10 +22,11 @@ public enum FolderPermission {
         };
     }
 
-    public static int getMaxPermission(){
-        return IntStream
-                .of(FolderPermission.READ.status,
-                    FolderPermission.WRITE.status,
-                    FolderPermission.MOVE.status).sum();
+    public static int getMaxPermission() {
+        return IntStream.of(
+                        FolderPermission.READ.status,
+                        FolderPermission.WRITE.status,
+                        FolderPermission.MOVE.status)
+                .sum();
     }
 }

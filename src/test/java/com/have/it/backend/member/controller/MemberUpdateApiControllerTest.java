@@ -1,12 +1,4 @@
-package com.have.it.backend.v1.member.controller;
-
-import com.have.it.backend.util.ApiControllerTestSupport;
-import com.have.it.backend.v1.member.dto.request.MemberUpdateRequest;
-import org.junit.jupiter.api.Test;
-import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.ResultActions;
-import java.nio.charset.StandardCharsets;
+package com.have.it.backend.member.controller;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.willDoNothing;
@@ -18,6 +10,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.have.it.backend.util.ApiControllerTestSupport;
+import com.have.it.backend.v1.member.dto.request.MemberUpdateRequest;
+import java.nio.charset.StandardCharsets;
+import org.junit.jupiter.api.Test;
+import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.web.servlet.ResultActions;
+
 class MemberUpdateApiControllerTest extends ApiControllerTestSupport {
 
     @Test
@@ -28,22 +28,25 @@ class MemberUpdateApiControllerTest extends ApiControllerTestSupport {
         Long memberId = 1L;
 
         MemberUpdateRequest request =
-                MemberUpdateRequest
-                        .builder()
+                MemberUpdateRequest.builder()
                         .nickname("test_member_nickname")
+                        .password("test_member_password")
                         .build();
 
         willDoNothing().given(memberUpdateUseCase).updateMember(anyLong(), any());
 
         // when
-        ResultActions actions = mockMvc.perform(patch("/api/v1/member/update/{memberId}", memberId)
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .characterEncoding(StandardCharsets.UTF_8)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andDo(print());
+        ResultActions actions =
+                mockMvc
+                        .perform(
+                                patch("/api/v1/member/update/{memberId}", memberId)
+                                        .with(csrf())
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .characterEncoding(StandardCharsets.UTF_8)
+                                        .content(objectMapper.writeValueAsString(request)))
+                        .andDo(print());
 
-        //then
+        // then
         actions.andExpect(status().isOk());
         verify(memberUpdateUseCase, times(1)).updateMember(anyLong(), any());
     }
@@ -56,25 +59,25 @@ class MemberUpdateApiControllerTest extends ApiControllerTestSupport {
         Long memberId = 1L;
 
         MemberUpdateRequest request =
-                MemberUpdateRequest
-                        .builder()
-                        .nickname(null)
-                        .build();
+                MemberUpdateRequest.builder().nickname(null).password(null).build();
 
         willDoNothing().given(memberUpdateUseCase).updateMember(anyLong(), any());
 
         // when
-        ResultActions actions = mockMvc.perform(patch("/api/v1/member/update/{memberId}", memberId)
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .characterEncoding(StandardCharsets.UTF_8)
-                        .content(objectMapper.writeValueAsString(request)));
+        ResultActions actions =
+                mockMvc.perform(
+                        patch("/api/v1/member/update/{memberId}", memberId)
+                                .with(csrf())
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .characterEncoding(StandardCharsets.UTF_8)
+                                .content(objectMapper.writeValueAsString(request)));
 
-        actions.andDo(print())
+        actions
+                .andDo(print())
                 .andExpect(jsonPath("$.data").isMap())
                 .andExpect(jsonPath("$.data['nickname']").value("닉네임은 비어있을 수 없습니다."));
 
-        //then
+        // then
         actions.andExpect(status().isBadRequest());
         verify(memberUpdateUseCase, times(0)).updateMember(anyLong(), any());
     }
@@ -86,28 +89,26 @@ class MemberUpdateApiControllerTest extends ApiControllerTestSupport {
         // given
         Long memberId = 1L;
 
-        MemberUpdateRequest request =
-                MemberUpdateRequest
-                        .builder()
-                        .nickname(" ")
-                        .build();
+        MemberUpdateRequest request = MemberUpdateRequest.builder().nickname(" ").build();
 
         willDoNothing().given(memberUpdateUseCase).updateMember(anyLong(), any());
 
         // when
-        ResultActions actions = mockMvc.perform(patch("/api/v1/member/update/{memberId}", memberId)
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .characterEncoding(StandardCharsets.UTF_8)
-                        .content(objectMapper.writeValueAsString(request)));
+        ResultActions actions =
+                mockMvc.perform(
+                        patch("/api/v1/member/update/{memberId}", memberId)
+                                .with(csrf())
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .characterEncoding(StandardCharsets.UTF_8)
+                                .content(objectMapper.writeValueAsString(request)));
 
-        actions.andDo(print())
+        actions
+                .andDo(print())
                 .andExpect(jsonPath("$.data").isMap())
                 .andExpect(jsonPath("$.data['nickname']").value("닉네임은 비어있을 수 없습니다."));
 
-        //then
+        // then
         actions.andExpect(status().isBadRequest());
         verify(memberUpdateUseCase, times(0)).updateMember(anyLong(), any());
     }
-
 }

@@ -1,14 +1,5 @@
 package com.have.it.backend.docs;
 
-import com.epages.restdocs.apispec.Schema;
-import com.have.it.backend.util.RestDocsTestSupport;
-import com.have.it.backend.v1.member.dto.request.MemberUpdateRequest;
-import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.restdocs.payload.JsonFieldType;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.ResultActions;
 import static com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper.document;
 import static com.epages.restdocs.apispec.ResourceDocumentation.resource;
 import static com.epages.restdocs.apispec.ResourceSnippetParameters.builder;
@@ -21,6 +12,16 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWit
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.epages.restdocs.apispec.Schema;
+import com.have.it.backend.util.RestDocsTestSupport;
+import com.have.it.backend.v1.member.dto.request.MemberUpdateRequest;
+import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.restdocs.payload.JsonFieldType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.web.servlet.ResultActions;
+
 class MemberUpdateApiControllerDocsTest extends RestDocsTestSupport {
 
     @Test
@@ -31,39 +32,48 @@ class MemberUpdateApiControllerDocsTest extends RestDocsTestSupport {
         Long memberId = 1L;
 
         MemberUpdateRequest request =
-                MemberUpdateRequest
-                        .builder()
+                MemberUpdateRequest.builder()
                         .nickname("test_member_nickname")
+                        .password("test_member_password")
                         .build();
 
         willDoNothing().given(memberUpdateUseCase).updateMember(anyLong(), any());
 
         // when
-        ResultActions actions = mockMvc.perform(patch("/api/v1/member/update/{memberId}", memberId)
-                .with(csrf())
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(request))
-                .header(HttpHeaders.AUTHORIZATION, "test-header")
-        ).andDo(document("member-update",
-                        preprocessRequest(prettyPrint()),
-                        preprocessResponse(prettyPrint()),
-                        resource(
-                                builder()
-                                        .tag("멤버")
-                                        .description("멤버 수정")
-                                        .requestFields(
-                                                fieldWithPath("nickname").type(JsonFieldType.STRING).description("멤버 닉네임")
-                                        )
-                                        .responseFields(
-                                                fieldWithPath("status").type(JsonFieldType.NUMBER).description("HTTP 응답 코드"),
-                                                fieldWithPath("data").type(JsonFieldType.NUMBER).description("기본 응답 데이터")
-                                        )
-                                        .responseSchema(Schema.schema("MemberUpdateResponse"))
-                                        .build()
-                        )
-                )
-        );
+        ResultActions actions =
+                mockMvc
+                        .perform(
+                                patch("/api/v1/member/update/{memberId}", memberId)
+                                        .with(csrf())
+                                        .accept(MediaType.APPLICATION_JSON)
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .content(objectMapper.writeValueAsString(request))
+                                        .header(HttpHeaders.AUTHORIZATION, "test-header"))
+                        .andDo(
+                                document(
+                                        "member-update",
+                                        preprocessRequest(prettyPrint()),
+                                        preprocessResponse(prettyPrint()),
+                                        resource(
+                                                builder()
+                                                        .tag("멤버")
+                                                        .description("멤버 수정")
+                                                        .requestFields(
+                                                                fieldWithPath("nickname")
+                                                                        .type(JsonFieldType.STRING)
+                                                                        .description("멤버 닉네임"),
+                                                                fieldWithPath("password")
+                                                                        .type(JsonFieldType.STRING)
+                                                                        .description("멤버 비밀번호"))
+                                                        .responseFields(
+                                                                fieldWithPath("status")
+                                                                        .type(JsonFieldType.NUMBER)
+                                                                        .description("HTTP 응답 코드"),
+                                                                fieldWithPath("data")
+                                                                        .type(JsonFieldType.NUMBER)
+                                                                        .description("기본 응답 데이터"))
+                                                        .responseSchema(Schema.schema("MemberUpdateResponse"))
+                                                        .build())));
 
         // then
         actions.andExpect(status().isOk());

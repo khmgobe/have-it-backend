@@ -21,5 +21,4 @@ public class BaseException extends RuntimeException {
     public String getMessage() {
         return exceptionInformation.getMessage();
     }
-
 }

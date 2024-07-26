@@ -22,11 +22,14 @@ public class MemberCreateService implements MemberCreateUseCase {
     @Override
     public void registerMember(final MemberCreateRequest request) {
 
-        if(repository.existsByEmail(request.email())) {
+        if (repository.existsByEmail(request.email())) {
             throw new BaseException(ExceptionInformation.EMAIL_DUPLICATED);
         }
 
-        final Member member = Member.fromCreate(request.email(), request.nickname(), passwordEncoder.encode(request.password()));
+        final Member member =
+                Member.fromCreate(
+                        request.email(), request.nickname(),
+                        passwordEncoder.encode(request.password()), request.role());
 
         repository.save(member);
     }

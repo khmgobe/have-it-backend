@@ -1,12 +1,5 @@
-package com.have.it.backend.v1.member.controller;
+package com.have.it.backend.member.controller;
 
-import com.have.it.backend.util.ApiControllerTestSupport;
-import com.have.it.backend.v1.member.dto.request.MemberCreateRequest;
-import org.junit.jupiter.api.Test;
-import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.ResultActions;
-import java.nio.charset.StandardCharsets;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.willDoNothing;
 import static org.mockito.Mockito.times;
@@ -17,6 +10,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.have.it.backend.util.ApiControllerTestSupport;
+import com.have.it.backend.v1.member.domain.enumeration.Role;
+import com.have.it.backend.v1.member.dto.request.MemberCreateRequest;
+import java.nio.charset.StandardCharsets;
+import org.junit.jupiter.api.Test;
+import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.web.servlet.ResultActions;
+
 class MemberCreateApiControllerTest extends ApiControllerTestSupport {
 
     @Test
@@ -25,24 +27,27 @@ class MemberCreateApiControllerTest extends ApiControllerTestSupport {
 
         // given
         MemberCreateRequest request =
-                MemberCreateRequest
-                        .builder()
+                MemberCreateRequest.builder()
                         .email("test@gmail.com")
                         .nickname("testNickname")
                         .password("testPassword")
+                        .role(Role.MEMBER)
                         .build();
 
         willDoNothing().given(memberCreateUseCase).registerMember(any());
 
         // when
-        ResultActions actions = mockMvc.perform(post("/api/v1/member/register")
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .characterEncoding(StandardCharsets.UTF_8)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andDo(print());
+        ResultActions actions =
+                mockMvc
+                        .perform(
+                                post("/api/v1/member/register")
+                                        .with(csrf())
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .characterEncoding(StandardCharsets.UTF_8)
+                                        .content(objectMapper.writeValueAsString(request)))
+                        .andDo(print());
 
-        //then
+        // then
         actions.andExpect(status().isCreated());
         verify(memberCreateUseCase, times(1)).registerMember(any());
     }
@@ -53,29 +58,27 @@ class MemberCreateApiControllerTest extends ApiControllerTestSupport {
 
         // given
         MemberCreateRequest request =
-                MemberCreateRequest
-                        .builder()
-                        .email(null)
-                        .nickname(null)
-                        .password(null)
-                        .build();
+                MemberCreateRequest.builder().email(null).nickname(null).password(null).role(null).build();
 
         willDoNothing().given(memberCreateUseCase).registerMember(any());
 
         // when
-        ResultActions actions = mockMvc.perform(post("/api/v1/member/register")
-                .with(csrf())
-                .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding(StandardCharsets.UTF_8)
-                .content(objectMapper.writeValueAsString(request)));
+        ResultActions actions =
+                mockMvc.perform(
+                        post("/api/v1/member/register")
+                                .with(csrf())
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .characterEncoding(StandardCharsets.UTF_8)
+                                .content(objectMapper.writeValueAsString(request)));
 
-        actions.andDo(print())
+        actions
+                .andDo(print())
                 .andExpect(jsonPath("$.data").isMap())
                 .andExpect(jsonPath("$.data['email']").value("이메일은 비어있을 수 없습니다."))
                 .andExpect(jsonPath("$.data['nickname']").value("닉네임은 비어있을 수 없습니다."))
                 .andExpect(jsonPath("$.data['password']").value("비밀번호는 비어있을 수 없습니다."));
 
-        //then
+        // then
         actions.andExpect(status().isBadRequest());
         verify(memberCreateUseCase, times(0)).registerMember(any());
     }
@@ -86,29 +89,27 @@ class MemberCreateApiControllerTest extends ApiControllerTestSupport {
 
         // given
         MemberCreateRequest request =
-                MemberCreateRequest
-                        .builder()
-                        .email(" ")
-                        .nickname(" ")
-                        .password(" ")
-                        .build();
+                MemberCreateRequest.builder().email(" ").nickname(" ").password(" ").build();
 
         willDoNothing().given(memberCreateUseCase).registerMember(any());
 
         // when
-        ResultActions actions = mockMvc.perform(post("/api/v1/member/register")
-                .with(csrf())
-                .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding(StandardCharsets.UTF_8)
-                .content(objectMapper.writeValueAsString(request)));
+        ResultActions actions =
+                mockMvc.perform(
+                        post("/api/v1/member/register")
+                                .with(csrf())
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .characterEncoding(StandardCharsets.UTF_8)
+                                .content(objectMapper.writeValueAsString(request)));
 
-        actions.andDo(print())
+        actions
+                .andDo(print())
                 .andExpect(jsonPath("$.data").isMap())
                 .andExpect(jsonPath("$.data['email']").value("이메일은 비어있을 수 없습니다."))
                 .andExpect(jsonPath("$.data['nickname']").value("닉네임은 비어있을 수 없습니다."))
                 .andExpect(jsonPath("$.data['password']").value("비밀번호는 비어있을 수 없습니다."));
 
-        //then
+        // then
         actions.andExpect(status().isBadRequest());
         verify(memberCreateUseCase, times(0)).registerMember(any());
     }
