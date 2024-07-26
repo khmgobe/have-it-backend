@@ -1,6 +1,6 @@
 package com.have.it.backend.v1.folder.dto.request;
 
-import com.have.it.backend.v1.folder.domain.enumeration.Folder;
+import com.have.it.backend.v1.folder.domain.Folder;
 import com.have.it.backend.v1.folder.domain.enumeration.FolderPermission;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

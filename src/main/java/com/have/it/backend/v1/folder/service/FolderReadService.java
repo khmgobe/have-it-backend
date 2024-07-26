@@ -2,7 +2,7 @@ package com.have.it.backend.v1.folder.service;
 
 import com.have.it.backend.v1.common.util.BaseException;
 import com.have.it.backend.v1.common.util.enumeration.ExceptionInformation;
-import com.have.it.backend.v1.folder.domain.enumeration.Folder;
+import com.have.it.backend.v1.folder.domain.Folder;
 import com.have.it.backend.v1.folder.dto.response.FolderReadResponse;
 import com.have.it.backend.v1.folder.repository.FolderJpaRepository;
 import com.have.it.backend.v1.folder.service.usecase.FolderReadUseCase;

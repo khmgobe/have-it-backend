@@ -1,6 +1,6 @@
 package com.have.it.backend.v1.folder.dto.response;
 
-import com.have.it.backend.v1.folder.domain.enumeration.Folder;
+import com.have.it.backend.v1.folder.domain.Folder;
 import com.have.it.backend.v1.folder.domain.enumeration.FolderPermission;
 import lombok.Builder;
 
