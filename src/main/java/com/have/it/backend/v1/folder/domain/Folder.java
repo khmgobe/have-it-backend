@@ -1,6 +1,7 @@
-package com.have.it.backend.v1.folder.domain.enumeration;
+package com.have.it.backend.v1.folder.domain;
 
 import com.have.it.backend.v1.common.util.BaseTimeEntity;
+import com.have.it.backend.v1.folder.domain.enumeration.FolderPermission;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
