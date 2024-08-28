@@ -18,7 +18,7 @@
     <h2 style="border-bottom: 1px solid #21262d; color: #c9d1d9;"> 🛠️ 사용 기술  </h2>
     <div style="margin: ; text-align: left;" "text-align: left;">
     Language : Java 17 <br>
-    FrameWork : Spring Boot 3.1 <br>
+    FrameWork : Spring Boot 3.1, Spring Data JPA, Junit5 <br>
     DataBase : H2 (dev), MySQL 8.0 <br>
     APIDocument : Swagger, Spring Rest Docs 
     </div>
