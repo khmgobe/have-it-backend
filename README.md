@@ -1,4 +1,3 @@
-# [📄 have-it API 문서 링크](https://khmgobe.github.io/have-it-backend/src/main/resources/static)
 <div align= "center">
     </div>
     <div style="text-align:left;">   
